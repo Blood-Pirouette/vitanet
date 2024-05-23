@@ -1,0 +1,7 @@
+# Hashes of file build rules.
+4429d89d58b51c180f609631dcaabf0b CMakeFiles/vitanet-velf
+1b1ce832cded9e3f5b8c0af54fb50a0e CMakeFiles/vitanet.self-self
+2168bf4e5c0a3ea85696b35b9ee974a1 CMakeFiles/vitanet.vpk-vpk
+072001b85ec9c38d5f68cf4d93a9630c vitanet.self.out
+bacabbf8b87e01324bc4efc3dc4da97d vitanet.vpk.out
+703efe0222fa99b22f771a446102e597 vitanet.vpk_param.sfo
