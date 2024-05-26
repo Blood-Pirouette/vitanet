@@ -1,6 +1,0 @@
-/home/anon/Documents/Personal/vita/vitanet/build/Debug/CMakeFiles/vitanet.dir
-/home/anon/Documents/Personal/vita/vitanet/build/Debug/CMakeFiles/vitanet-velf.dir
-/home/anon/Documents/Personal/vita/vitanet/build/Debug/CMakeFiles/vitanet.self-self.dir
-/home/anon/Documents/Personal/vita/vitanet/build/Debug/CMakeFiles/vitanet.vpk-vpk.dir
-/home/anon/Documents/Personal/vita/vitanet/build/Debug/CMakeFiles/edit_cache.dir
-/home/anon/Documents/Personal/vita/vitanet/build/Debug/CMakeFiles/rebuild_cache.dir

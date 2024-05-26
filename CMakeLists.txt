@@ -50,7 +50,6 @@ include_directories(
 # ${CMAKE_CURRENT_BINARY_DIR} lets you use any library currently being built
 link_directories(
   ${CMAKE_CURRENT_BINARY_DIR}
-  /usr/include/
 
 )
 
@@ -60,6 +59,9 @@ add_executable(${PROJECT_NAME}
   src/main.cpp
   src/classes/book_class.cpp
   src/services/scraper.hpp
+  src/includes/tinyxml2.cpp
+  src/includes/tinyxml2.h
+
 )
 
 

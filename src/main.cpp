@@ -15,7 +15,6 @@
 #include <psp2/net/netctl.h>
 #include <psp2/ctrl.h>
 
-
 #include "services/scraper.hpp"
 #include "classes/book_class.cpp"
 
@@ -32,20 +31,19 @@ vita2d_font *text_font;
 
 int main(int argc, char *argv[])
 {
-	SceCtrlData pad; // Will be used to monitor trackpad presses
-	vector<Book> books; // A list called books of Book objects 
-	int selection = 0; // Used to track user selection
+	SceCtrlData pad;	// Will be used to monitor trackpad presses
+	vector<Book> books; // A list called books of Book objects
+	int selection = 0;	// Used to track user selection
 
 	/* Initialize the screen */
 	netInit();
 	vita2d_init();
 	vita2d_set_clear_color(RGBA8(0, 0, 0, 255));
 	text_font = vita2d_load_font_file("app0:assets/font.ttf");
-	
-	
+
 	/*Initialize the books list*/
 	booksInit(books);
-	//string scraped_text = scrape_site();
+	string scraped_text = scrape_site();
 
 	// Continuously Draw Choices and Keep Track of Selection
 	while (true)
@@ -54,7 +52,7 @@ int main(int argc, char *argv[])
 		vita2d_start_drawing();
 		vita2d_clear_screen();
 		vita2d_font_draw_text(text_font, 200, 60, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, "Books");
-
+		vita2d_font_draw_text(text_font, 200, 90, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, scraped_text.c_str());
 
 		/* Track User Pressing UP/DOWN/CROSS with the selection variable */
 		sceCtrlPeekBufferPositive(0, &pad, 1);
@@ -69,13 +67,12 @@ int main(int argc, char *argv[])
 		}
 		else if (pad.buttons & SCE_CTRL_CROSS)
 		{
-			//open books page
+			// open books page
 		}
 		if (selection > 4 || selection < 0)
 		{
 			selection = 0;
 		}
-
 
 		/* Every frame draw all title for each Book object in the books list */
 		for (int i = 0; i < 5; i++)
@@ -104,8 +101,9 @@ int main(int argc, char *argv[])
 
 string scrape_site()
 {
-	//scrape site
-	return "";
+	const char *htmlData = "<div><p>Some text</p></div>";
+
+	return getTitle(htmlData);
 }
 
 void booksInit(vector<Book> &books)
@@ -134,5 +132,3 @@ void netInit()
 	sceSysmoduleLoadModule(SCE_SYSMODULE_HTTP);
 	sceHttpInit(1 * 1024 * 1024);
 }
-
-
