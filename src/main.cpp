@@ -17,12 +17,13 @@
 
 #include "services/scraper.hpp"
 #include "classes/book_class.cpp"
+#include "services/libcurl.cpp"
 
 // namespace
 using namespace std;
 
 // function prototypes
-void netInit();
+//void netInit();
 string scrape_site();
 void booksInit(vector<Book> &books);
 
@@ -36,7 +37,8 @@ int main(int argc, char *argv[])
 	int selection = 0;	// Used to track user selection
 
 	/* Initialize the screen */
-	netInit();
+	//netInit();
+	download();
 	vita2d_init();
 	vita2d_set_clear_color(RGBA8(0, 0, 0, 255));
 	text_font = vita2d_load_font_file("app0:assets/font.ttf");
@@ -118,7 +120,7 @@ void booksInit(vector<Book> &books)
 	books[2].book_url = "book3.html";
 }
 
-//   Initialize network
+/*  Initialize network
 void netInit()
 {
 	sceSysmoduleLoadModule(SCE_SYSMODULE_NET);
@@ -132,3 +134,4 @@ void netInit()
 	sceSysmoduleLoadModule(SCE_SYSMODULE_HTTP);
 	sceHttpInit(1 * 1024 * 1024);
 }
+*/
