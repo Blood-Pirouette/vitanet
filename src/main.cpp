@@ -120,18 +120,3 @@ void booksInit(vector<Book> &books)
 	books[2].book_url = "book3.html";
 }
 
-/*  Initialize network
-void netInit()
-{
-	sceSysmoduleLoadModule(SCE_SYSMODULE_NET);
-	SceNetInitParam netInitParam;
-	int size = 1 * 1024 * 1024;
-	netInitParam.memory = malloc(size);
-	netInitParam.size = size;
-	netInitParam.flags = 0;
-	sceNetInit(&netInitParam);
-	sceNetCtlInit();
-	sceSysmoduleLoadModule(SCE_SYSMODULE_HTTP);
-	sceHttpInit(1 * 1024 * 1024);
-}
-*/
