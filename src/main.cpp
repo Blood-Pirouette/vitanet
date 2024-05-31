@@ -22,9 +22,12 @@
 // namespace
 using namespace std;
 
+// constant macro
+const int htmlsize = 100 * 1024;
+
 // function prototypes
-//void netInit();
-string scrape_site();
+// void netInit();
+void scrape_site(char *);
 void booksInit(vector<Book> &books);
 
 // global variable
@@ -37,7 +40,7 @@ int main(int argc, char *argv[])
 	int selection = 0;	// Used to track user selection
 
 	/* Initialize the screen */
-	//netInit();
+	// netInit();
 	download();
 	vita2d_init();
 	vita2d_set_clear_color(RGBA8(0, 0, 0, 255));
@@ -45,8 +48,11 @@ int main(int argc, char *argv[])
 
 	/*Initialize the books list*/
 	booksInit(books);
-	string scraped_text = scrape_site();
-
+	char htmlbuffer[htmlsize];
+	//char error_code[24];
+	scrape_site(htmlbuffer);
+	htmlbuffer[20] = 'c';
+	char example = htmlbuffer[20];
 	// Continuously Draw Choices and Keep Track of Selection
 	while (true)
 	{
@@ -54,7 +60,7 @@ int main(int argc, char *argv[])
 		vita2d_start_drawing();
 		vita2d_clear_screen();
 		vita2d_font_draw_text(text_font, 200, 60, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, "Books");
-		vita2d_font_draw_text(text_font, 200, 90, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, scraped_text.c_str());
+		//vita2d_font_draw_text(text_font, 200, 90, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, &example);
 
 		/* Track User Pressing UP/DOWN/CROSS with the selection variable */
 		sceCtrlPeekBufferPositive(0, &pad, 1);
@@ -101,11 +107,28 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-string scrape_site()
+void scrape_site(char *htmlbuffer)
 {
-	const char *htmlData = "<div><p>Some text</p></div>";
+	// const char *htmlData = "<div><p>Some text</p></div>";
 
-	return getTitle(htmlData);
+	// open file
+	const char *file = "ux0:data/vitanet/index.html";
+	SceUID fd = sceIoOpen(file, SCE_O_RDONLY, 0777);
+	if (fd < 0)
+	{
+		string error = "error opening file";
+		//strcpy(error_code, error.c_str());
+	}
+	else
+	{
+		// read file, place the data in htmlbuffer and set null pointer
+		int bytes_read = sceIoRead(fd, htmlbuffer, htmlsize - 1);
+		htmlbuffer[htmlsize-1] = '\0';
+		//string error = "Successfly opened file";
+		//strcpy(error_code, error.c_str());
+	}
+	// close file
+	sceIoClose(fd);
 }
 
 void booksInit(vector<Book> &books)
@@ -119,4 +142,3 @@ void booksInit(vector<Book> &books)
 	books[1].book_url = "book2.html";
 	books[2].book_url = "book3.html";
 }
-
