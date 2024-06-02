@@ -37,12 +37,13 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 # Optional. You can specify more param.sfo flags this way.
 set(VITA_MKSFOEX_FLAGS "${VITA_MKSFOEX_FLAGS} -d PARENTAL_LEVEL=1")
+set(PSVITAIP "192.168.12.87" CACHE STRING "PSVita IP (for FTP access)")
+
 
 # Add any additional include paths here
 include_directories(
   ${wo}
 )
-
 
 
 
@@ -99,10 +100,10 @@ SceNetCtl_stub
 )
 
 ## Create Vita files
-vita_create_self(${PROJECT_NAME}.self ${PROJECT_NAME})
+vita_create_self(eboot.bin ${PROJECT_NAME})
 # The FILE directive lets you add additional files to the VPK, the syntax is
 # FILE src_path dst_path_in_vpk. In this case, we add the LiveArea paths.
-vita_create_vpk(${PROJECT_NAME}.vpk ${VITA_TITLEID} ${PROJECT_NAME}.self
+vita_create_vpk(${PROJECT_NAME}.vpk ${VITA_TITLEID} eboot.bin
   VERSION ${VITA_VERSION}
   NAME ${VITA_APP_NAME}
   FILE assets/font.ttf assets/font.ttf
@@ -111,3 +112,12 @@ vita_create_vpk(${PROJECT_NAME}.vpk ${VITA_TITLEID} ${PROJECT_NAME}.self
   FILE sce_sys/livearea/contents/startup.png sce_sys/livearea/contents/startup.png
   FILE sce_sys/livearea/contents/template.xml sce_sys/livearea/contents/template.xml
 )
+
+
+add_custom_target(send ALL
+                  COMMAND echo destroy | nc ${PSVITAIP} 1338
+                  COMMAND curl -T eboot.bin ftp://${PSVITAIP}:1337/ux0:/app/${VITA_TITLEID}/
+                  COMMAND echo launch ${VITA_TITLEID} | nc ${PSVITAIP} 1338
+                  DEPENDS ${PROJECT_NAME}.vpk-vpk
+                  )
+

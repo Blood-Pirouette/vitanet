@@ -22,6 +22,7 @@
 // namespace
 using namespace std;
 
+
 // constant macro
 const int htmlsize = 100 * 1024;
 
@@ -51,8 +52,6 @@ int main(int argc, char *argv[])
 	char htmlbuffer[htmlsize];
 	int error_code;
 	scrape_site(htmlbuffer, &error_code);
-	//htmlbuffer[20] = 'c';
-	//char example = htmlbuffer[20];
 	// Continuously Draw Choices and Keep Track of Selection
 	while (true)
 	{
@@ -60,7 +59,7 @@ int main(int argc, char *argv[])
 		vita2d_start_drawing();
 		vita2d_clear_screen();
 		vita2d_font_draw_text(text_font, 200, 60, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, "Books");
-		vita2d_font_draw_text(text_font, 200, 90, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, to_string(error_code).c_str());
+		vita2d_font_draw_text(text_font, 200, 90, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, "test2");
 
 		/* Track User Pressing UP/DOWN/CROSS with the selection variable */
 		sceCtrlPeekBufferPositive(0, &pad, 1);
@@ -123,8 +122,8 @@ void scrape_site(char *htmlbuffer, int *error_code)
 	{
 		// read file, place the data in htmlbuffer and set null pointer
 		int bytes_read = sceIoRead(fd, htmlbuffer, htmlsize - 1);
-		htmlbuffer[htmlsize-1] = '\0';
-		*error_code = bytes_read;
+		htmlbuffer[bytes_read] = '\0';
+		//*error_code = bytes_read;
 		//string error = "Successfly opened file";
 		//strcpy(error_code, error.c_str());
 	}
