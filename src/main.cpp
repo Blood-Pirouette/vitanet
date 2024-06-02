@@ -27,7 +27,7 @@ const int htmlsize = 100 * 1024;
 
 // function prototypes
 // void netInit();
-void scrape_site(char *);
+void scrape_site(char *, int*);
 void booksInit(vector<Book> &books);
 
 // global variable
@@ -49,10 +49,10 @@ int main(int argc, char *argv[])
 	/*Initialize the books list*/
 	booksInit(books);
 	char htmlbuffer[htmlsize];
-	//char error_code[24];
-	scrape_site(htmlbuffer);
-	htmlbuffer[20] = 'c';
-	char example = htmlbuffer[20];
+	int error_code;
+	scrape_site(htmlbuffer, &error_code);
+	//htmlbuffer[20] = 'c';
+	//char example = htmlbuffer[20];
 	// Continuously Draw Choices and Keep Track of Selection
 	while (true)
 	{
@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
 		vita2d_start_drawing();
 		vita2d_clear_screen();
 		vita2d_font_draw_text(text_font, 200, 60, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, "Books");
-		//vita2d_font_draw_text(text_font, 200, 90, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, &example);
+		vita2d_font_draw_text(text_font, 200, 90, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, to_string(error_code).c_str());
 
 		/* Track User Pressing UP/DOWN/CROSS with the selection variable */
 		sceCtrlPeekBufferPositive(0, &pad, 1);
@@ -107,7 +107,7 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-void scrape_site(char *htmlbuffer)
+void scrape_site(char *htmlbuffer, int *error_code)
 {
 	// const char *htmlData = "<div><p>Some text</p></div>";
 
@@ -124,6 +124,7 @@ void scrape_site(char *htmlbuffer)
 		// read file, place the data in htmlbuffer and set null pointer
 		int bytes_read = sceIoRead(fd, htmlbuffer, htmlsize - 1);
 		htmlbuffer[htmlsize-1] = '\0';
+		*error_code = bytes_read;
 		//string error = "Successfly opened file";
 		//strcpy(error_code, error.c_str());
 	}
