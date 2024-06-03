@@ -22,13 +22,12 @@
 // namespace
 using namespace std;
 
-
 // constant macro
 const int htmlsize = 100 * 1024;
 
 // function prototypes
 // void netInit();
-void scrape_site(char *, int*);
+string scrape_site(char *);
 void booksInit(vector<Book> &books);
 
 // global variable
@@ -50,8 +49,9 @@ int main(int argc, char *argv[])
 	/*Initialize the books list*/
 	booksInit(books);
 	char htmlbuffer[htmlsize];
-	int error_code;
-	scrape_site(htmlbuffer, &error_code);
+
+	string title = scrape_site(htmlbuffer);
+
 	// Continuously Draw Choices and Keep Track of Selection
 	while (true)
 	{
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 		vita2d_start_drawing();
 		vita2d_clear_screen();
 		vita2d_font_draw_text(text_font, 200, 60, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, "Books");
-		vita2d_font_draw_text(text_font, 200, 90, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, "test2");
+		vita2d_font_draw_text(text_font, 200, 90, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, title.c_str());
 
 		/* Track User Pressing UP/DOWN/CROSS with the selection variable */
 		sceCtrlPeekBufferPositive(0, &pad, 1);
@@ -106,29 +106,24 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-void scrape_site(char *htmlbuffer, int *error_code)
+string scrape_site(char *htmlbuffer)
 {
-	// const char *htmlData = "<div><p>Some text</p></div>";
+//	char *htmlData = "<!DOCTYPE html> <html lang=\"en-us\" class=\"no-js\"><head><style><title>Some text</title></style></head></html>";
 
 	// open file
-	const char *file = "ux0:data/vitanet/index.html";
+	const char *file = "ux0:data/vitanet/index2.html";
 	SceUID fd = sceIoOpen(file, SCE_O_RDONLY, 0777);
-	if (fd < 0)
-	{
-		string error = "error opening file";
-		//strcpy(error_code, error.c_str());
-	}
-	else
-	{
-		// read file, place the data in htmlbuffer and set null pointer
-		int bytes_read = sceIoRead(fd, htmlbuffer, htmlsize - 1);
-		htmlbuffer[bytes_read] = '\0';
-		//*error_code = bytes_read;
-		//string error = "Successfly opened file";
-		//strcpy(error_code, error.c_str());
-	}
+	// read file, place the data in htmlbuffer and set null pointer
+	int bytes_read = sceIoRead(fd, htmlbuffer, htmlsize);
+	htmlbuffer[bytes_read] = '\0';
+	string mystring(htmlbuffer);
+	string cutstr = mystring.substr(0,10);
+	string title = getTitle(htmlbuffer);
+
 	// close file
 	sceIoClose(fd);
+
+	return title;
 }
 
 void booksInit(vector<Book> &books)

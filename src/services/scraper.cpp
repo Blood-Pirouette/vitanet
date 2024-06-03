@@ -6,20 +6,28 @@
 using namespace tinyxml2;
 using namespace std;
 
-
 string getTitle(const char *htmlData)
 {
     XMLDocument doc;
-    doc.Parse(htmlData);
-    XMLElement *div = doc.FirstChildElement("div");
-    if (div)
+    doc.Parse(htmlData, 90000);
+    XMLElement *html = doc.FirstChildElement("html");
+    if (html)
     {
-        XMLElement *p = div->FirstChildElement("p");
-        if (p)
+        return "entered html";
+        XMLElement *head = html->FirstChildElement("head");
+        if (head)
         {
-            const char *text = p->GetText();
-            return text;
+            XMLElement *style = head->FirstChildElement("style");
+            while (style)
+            {
+                XMLElement *title = head->FirstChildElement("title");
+                {
+                    const char *text = title->GetText();
+                    return text;
+                }
+                style = style->NextSiblingElement("style");
+            }
         }
     }
-    return "";
+    return "not found";
 }
