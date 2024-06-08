@@ -108,22 +108,12 @@ int main(int argc, char *argv[])
 
 string scrape_site(char *htmlbuffer)
 {
-//	char *htmlData = "<!DOCTYPE html> <html lang=\"en-us\" class=\"no-js\"><head><style><title>Some text</title></style></head></html>";
-
-	// open file
+	// storing file content inside a char array causes the app to crash, needs file opener
+	// FILE/sceIoOpen TODO
 	const char *file = "ux0:data/vitanet/index2.html";
-	SceUID fd = sceIoOpen(file, SCE_O_RDONLY, 0777);
-	// read file, place the data in htmlbuffer and set null pointer
-	int bytes_read = sceIoRead(fd, htmlbuffer, htmlsize);
-	htmlbuffer[bytes_read] = '\0';
-	string mystring(htmlbuffer);
-	string cutstr = mystring.substr(0,10);
-	string title = getTitle(htmlbuffer);
 
-	// close file
-	sceIoClose(fd);
 
-	return title;
+	return "";
 }
 
 void booksInit(vector<Book> &books)
