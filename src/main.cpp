@@ -1,19 +1,24 @@
-#include <psp2/kernel/processmgr.h>
 #include <sstream>
 #include <vector>
-#include <psp2/io/fcntl.h>
-#include <vita2d.h>
 #include <map>
+#include <stdio.h>
+
+#include <vita2d.h>
 #include <psp2/appmgr.h>
+#include <psp2/types.h>
+#include <psp2/ctrl.h>
+
 #include <psp2/io/stat.h>
 #include <psp2/io/dirent.h>
-#include <psp2/types.h>
-#include <psp2/kernel/threadmgr.h>
-#include <psp2/net/http.h>
+#include <psp2/io/fcntl.h>
+
 #include <psp2/sysmodule.h>
+#include <psp2/kernel/processmgr.h>
+#include <psp2/kernel/threadmgr.h>
+
+#include <psp2/net/http.h>
 #include <psp2/net/net.h>
 #include <psp2/net/netctl.h>
-#include <psp2/ctrl.h>
 
 #include "services/scraper.hpp"
 #include "classes/book_class.cpp"
@@ -27,7 +32,7 @@ const int htmlsize = 100 * 1024;
 
 // function prototypes
 // void netInit();
-string scrape_site(char *);
+string scrape_site();
 void booksInit(vector<Book> &books);
 
 // global variable
@@ -50,7 +55,7 @@ int main(int argc, char *argv[])
 	booksInit(books);
 	char htmlbuffer[htmlsize];
 
-	string title = scrape_site(htmlbuffer);
+	string title = scrape_site();
 
 	// Continuously Draw Choices and Keep Track of Selection
 	while (true)
@@ -106,14 +111,20 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-string scrape_site(char *htmlbuffer)
+string scrape_site()
 {
-	// storing file content inside a char array causes the app to crash, needs file opener
-	// FILE/sceIoOpen TODO
-	const char *file = "ux0:data/vitanet/index2.html";
-
-
-	return "";
+	//const char *file = "ux0:data/vitanet/index.xml";
+	//SceUID fd = sceIoOpen(file, SCE_O_RDONLY, 0777);
+	FILE *htmlstream = fopen("ux0:data/vitanet/index.xml", "r");
+	if (htmlstream)
+	{
+		string title = getTitle(htmlstream);
+		return title;
+	}
+	else
+	{
+		return "failed to open";
+	}
 }
 
 void booksInit(vector<Book> &books)

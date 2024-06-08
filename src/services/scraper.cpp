@@ -1,15 +1,16 @@
 #include <iostream>
 #include <string>
+#include <cstdio>
 
 #include "../includes/tinyxml2.h"
 
 using namespace tinyxml2;
 using namespace std;
 
-string getTitle(const char *htmlData)
+string getTitle(FILE *htmlData)
 {
     XMLDocument doc;
-    doc.Parse(htmlData, 90000);
+    doc.LoadFile(htmlData);
     XMLElement *html = doc.FirstChildElement("html");
     if (html)
     {

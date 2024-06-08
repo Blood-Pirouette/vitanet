@@ -31,10 +31,11 @@ set(VITA_TITLEID  "VSDK00006")
 # Optional version string to show in LiveArea's more info screen
 set(VITA_VERSION  "01.00")
 
+#-std=c++11 
 ## Flags and includes for building
 # Note that we make sure not to overwrite previous flags
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ")
 # Optional. You can specify more param.sfo flags this way.
 set(VITA_MKSFOEX_FLAGS "${VITA_MKSFOEX_FLAGS} -d PARENTAL_LEVEL=1")
 set(PSVITAIP "192.168.12.87" CACHE STRING "PSVita IP (for FTP access)")
