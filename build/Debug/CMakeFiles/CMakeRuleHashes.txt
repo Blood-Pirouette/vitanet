@@ -1,0 +1,8 @@
+# Hashes of file build rules.
+38fd8b987f948ef5de419551ad96f2c8 CMakeFiles/eboot.bin-self
+543e73e0e11805a9b33291c3ba1e70ed CMakeFiles/send
+4429d89d58b51c180f609631dcaabf0b CMakeFiles/vitanet-velf
+2168bf4e5c0a3ea85696b35b9ee974a1 CMakeFiles/vitanet.vpk-vpk
+8d3974112ad21eaa64abdfa03e1f28a5 eboot.bin.out
+4700d043819d6870a2184197a6a83ca2 vitanet.vpk.out
+703efe0222fa99b22f771a446102e597 vitanet.vpk_param.sfo

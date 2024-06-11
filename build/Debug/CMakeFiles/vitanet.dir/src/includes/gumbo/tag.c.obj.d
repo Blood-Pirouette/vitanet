@@ -1,0 +1,21 @@
+CMakeFiles/vitanet.dir/src/includes/gumbo/tag.c.obj: \
+ /home/anon/Documents/Personal/vita/vitanet/src/includes/gumbo/tag.c \
+ /home/anon/Documents/Personal/vita/vitanet/src/includes/gumbo/gumbo.h \
+ /opt/vitasdk/lib/gcc/arm-vita-eabi/10.3.0/include/stdbool.h \
+ /opt/vitasdk/lib/gcc/arm-vita-eabi/10.3.0/include/stddef.h \
+ /opt/vitasdk/arm-vita-eabi/include/assert.h \
+ /opt/vitasdk/arm-vita-eabi/include/_ansi.h \
+ /opt/vitasdk/arm-vita-eabi/include/newlib.h \
+ /opt/vitasdk/arm-vita-eabi/include/_newlib_version.h \
+ /opt/vitasdk/arm-vita-eabi/include/sys/config.h \
+ /opt/vitasdk/arm-vita-eabi/include/machine/ieeefp.h \
+ /opt/vitasdk/arm-vita-eabi/include/sys/features.h \
+ /opt/vitasdk/arm-vita-eabi/include/bits/posix_opt.h \
+ /opt/vitasdk/lib/gcc/arm-vita-eabi/10.3.0/include-fixed/limits.h \
+ /opt/vitasdk/arm-vita-eabi/include/ctype.h \
+ /opt/vitasdk/arm-vita-eabi/include/sys/cdefs.h \
+ /opt/vitasdk/arm-vita-eabi/include/machine/_default_types.h \
+ /opt/vitasdk/arm-vita-eabi/include/sys/_locale.h \
+ /opt/vitasdk/arm-vita-eabi/include/strings.h \
+ /opt/vitasdk/arm-vita-eabi/include/sys/_types.h \
+ /opt/vitasdk/arm-vita-eabi/include/machine/_types.h

@@ -1,0 +1,122 @@
+[
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-g++  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -std=c++11 -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/main.cpp.obj -c /home/anon/Documents/Personal/vita/vitanet/src/main.cpp",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/main.cpp",
+  "output": "CMakeFiles/vitanet.dir/src/main.cpp.obj"
+},
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-g++  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -std=c++11 -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/classes/book_class.cpp.obj -c /home/anon/Documents/Personal/vita/vitanet/src/classes/book_class.cpp",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/classes/book_class.cpp",
+  "output": "CMakeFiles/vitanet.dir/src/classes/book_class.cpp.obj"
+},
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-gcc  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -Wall -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/includes/html-parser/src/comparison-status.c.obj -c /home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/comparison-status.c",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/comparison-status.c",
+  "output": "CMakeFiles/vitanet.dir/src/includes/html-parser/src/comparison-status.c.obj"
+},
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-gcc  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -Wall -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/appendix.c.obj -c /home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/appendix.c",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/appendix.c",
+  "output": "CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/appendix.c.obj"
+},
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-gcc  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -Wall -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/comparison.c.obj -c /home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/comparison.c",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/comparison.c",
+  "output": "CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/comparison.c.obj"
+},
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-gcc  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -Wall -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/deletion.c.obj -c /home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/deletion.c",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/deletion.c",
+  "output": "CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/deletion.c.obj"
+},
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-gcc  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -Wall -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/dom-util.c.obj -c /home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/dom-util.c",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/dom-util.c",
+  "output": "CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/dom-util.c.obj"
+},
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-gcc  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -Wall -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/dom.c.obj -c /home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/dom.c",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/dom.c",
+  "output": "CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/dom.c.obj"
+},
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-gcc  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -Wall -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/modification.c.obj -c /home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/modification.c",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/modification.c",
+  "output": "CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/modification.c.obj"
+},
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-gcc  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -Wall -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/prependix.c.obj -c /home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/prependix.c",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/prependix.c",
+  "output": "CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/prependix.c.obj"
+},
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-gcc  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -Wall -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/query/msi-uint16.c.obj -c /home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/query/msi-uint16.c",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/query/msi-uint16.c",
+  "output": "CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/query/msi-uint16.c.obj"
+},
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-gcc  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -Wall -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/query/query-util.c.obj -c /home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/query/query-util.c",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/query/query-util.c",
+  "output": "CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/query/query-util.c.obj"
+},
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-gcc  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -Wall -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/query/query.c.obj -c /home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/query/query.c",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/query/query.c",
+  "output": "CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/query/query.c.obj"
+},
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-gcc  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -Wall -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/reading/reading-util.c.obj -c /home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/reading/reading-util.c",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/reading/reading-util.c",
+  "output": "CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/reading/reading-util.c.obj"
+},
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-gcc  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -Wall -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/reading/reading.c.obj -c /home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/reading/reading.c",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/reading/reading.c",
+  "output": "CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/reading/reading.c.obj"
+},
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-gcc  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -Wall -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/replacement.c.obj -c /home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/replacement.c",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/replacement.c",
+  "output": "CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/replacement.c.obj"
+},
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-gcc  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -Wall -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/traversal.c.obj -c /home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/traversal.c",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/traversal.c",
+  "output": "CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/traversal.c.obj"
+},
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-gcc  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -Wall -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/util/string-auto-uint16-map.c.obj -c /home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/util/string-auto-uint16-map.c",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/util/string-auto-uint16-map.c",
+  "output": "CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/util/string-auto-uint16-map.c.obj"
+},
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-gcc  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -Wall -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/writing.c.obj -c /home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/writing.c",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/dom/writing.c",
+  "output": "CMakeFiles/vitanet.dir/src/includes/html-parser/src/dom/writing.c.obj"
+},
+{
+  "directory": "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+  "command": "/opt/vitasdk/bin/arm-vita-eabi-gcc  -I/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/include  -Wl,-q -Wall -O0 -g -DDEBUG -D_DEBUG -o CMakeFiles/vitanet.dir/src/includes/html-parser/src/parser.c.obj -c /home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/parser.c",
+  "file": "/home/anon/Documents/Personal/vita/vitanet/src/includes/html-parser/src/parser.c",
+  "output": "CMakeFiles/vitanet.dir/src/includes/html-parser/src/parser.c.obj"
+}
+]

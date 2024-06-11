@@ -28,11 +28,11 @@
 using namespace std;
 
 // constant macro
-const int htmlsize = 100 * 1024;
+const int BUFFER_SIZE = 100 * 1024;
 
 // function prototypes
 // void netInit();
-string scrape_site();
+string scrape_site(char *);
 void booksInit(vector<Book> &books);
 
 // global variable
@@ -53,9 +53,9 @@ int main(int argc, char *argv[])
 
 	/*Initialize the books list*/
 	booksInit(books);
-	char htmlbuffer[htmlsize];
+	char htmlbuffer[BUFFER_SIZE];
 
-	string title = scrape_site();
+	string title = scrape_site(htmlbuffer);
 
 	// Continuously Draw Choices and Keep Track of Selection
 	while (true)
@@ -111,20 +111,14 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-string scrape_site()
+string scrape_site(char *buffer)
 {
-	//const char *file = "ux0:data/vitanet/index.xml";
-	//SceUID fd = sceIoOpen(file, SCE_O_RDONLY, 0777);
-	FILE *htmlstream = fopen("ux0:data/vitanet/index.xml", "r");
-	if (htmlstream)
-	{
-		string title = getTitle(htmlstream);
-		return title;
-	}
-	else
-	{
-		return "failed to open";
-	}
+	const char *file = "ux0:data/vitanet/index2.html";
+	SceUID fd = sceIoOpen(file, SCE_O_RDONLY, 0777);
+	sceIoRead(fd, buffer, BUFFER_SIZE);
+	buffer[BUFFER_SIZE - 1] = '\0';
+	string title = getTitle(buffer);
+	return title;
 }
 
 void booksInit(vector<Book> &books)

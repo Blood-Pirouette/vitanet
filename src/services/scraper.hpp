@@ -4,4 +4,6 @@
 
 
 
-std::string getTitle(const char*);
+using namespace std;
+
+string getTitle(const char*);

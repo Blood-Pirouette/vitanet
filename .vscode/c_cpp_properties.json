@@ -9,6 +9,7 @@
             "defines": [],
             "compilerPath": "/opt/vitasdk/bin/arm-vita-eabi-gcc",
             "cStandard": "c17",
+            "cppStandard": "c++17",
             "intelliSenseMode": "linux-clang-x64",
             "browse": {
                 "path": [
@@ -21,4 +22,3 @@
     "version": 4
 }
 
-//            "cppStandard": "c++17",

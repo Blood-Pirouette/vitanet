@@ -31,21 +31,23 @@ set(VITA_TITLEID  "VSDK00006")
 # Optional version string to show in LiveArea's more info screen
 set(VITA_VERSION  "01.00")
 
-#-std=c++11 
+
 ## Flags and includes for building
 # Note that we make sure not to overwrite previous flags
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 # Optional. You can specify more param.sfo flags this way.
 set(VITA_MKSFOEX_FLAGS "${VITA_MKSFOEX_FLAGS} -d PARENTAL_LEVEL=1")
 set(PSVITAIP "192.168.12.87" CACHE STRING "PSVita IP (for FTP access)")
 
 
+
+
 # Add any additional include paths here
 include_directories(
   ${wo}
+  ${CMAKE_SOURCE_DIR}/src/includes/html-parser/include
 )
-
 
 
 # Add any additional library paths here
@@ -55,14 +57,24 @@ link_directories(
 
 )
 
+
+# Define the root source directory
+set(SRC_DIR ${CMAKE_SOURCE_DIR}/src/includes)
+
+
+
+# Collect all .cpp and .h files recursively
+file(GLOB_RECURSE SOURCES "${SRC_DIR}/*.c" "${SRC_DIR}/*.h")
+
+# Add executable with the collected sources
+
 ## Build and link
 # Add all the files needed to compile here
 add_executable(${PROJECT_NAME}
   src/main.cpp
   src/classes/book_class.cpp
   src/services/scraper.hpp
-  src/includes/tinyxml2.cpp
-  src/includes/tinyxml2.h
+  ${SOURCES}
 
 )
 

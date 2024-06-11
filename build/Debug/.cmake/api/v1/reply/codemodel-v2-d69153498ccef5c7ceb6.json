@@ -1,0 +1,96 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "vitanet",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "eboot.bin-self::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-eboot.bin-self-Debug-17acb0e90418b2f68aae.json",
+					"name" : "eboot.bin-self",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "send::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-send-Debug-663988d0b337b546e79e.json",
+					"name" : "send",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "vitanet::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-vitanet-Debug-5226aff26a0d8eabc1d0.json",
+					"name" : "vitanet",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "vitanet-velf::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-vitanet-velf-Debug-04de8aa3d6493c47d81e.json",
+					"name" : "vitanet-velf",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "vitanet.vpk-vpk::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-vitanet.vpk-vpk-Debug-69856f19614830045f99.json",
+					"name" : "vitanet.vpk-vpk",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/anon/Documents/Personal/vita/vitanet/build/Debug",
+		"source" : "/home/anon/Documents/Personal/vita/vitanet"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
