@@ -1,5 +1,3 @@
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -11,6 +9,6 @@ using namespace std;
 
 string getTitle(const char *markup)
 {
-
+    //TODO: Implement cpython-vita interpreter with Beatiful Soup 4
     return "";
 }
