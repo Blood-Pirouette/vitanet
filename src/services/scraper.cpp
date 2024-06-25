@@ -10,8 +10,11 @@ using namespace std;
 
 string getTitle(const char *markup)
 {
-    // TODO: Implement cpython-vita interpreter with Beatiful Soup 4
-    //Py_Initialize();
-    //PyRun_SimpleString("print('Hello world')\n");
-    return "";
+    Py_Initialize();
+    const char *pythonCode = "example_string = 'Hello world'";
+    PyRun_SimpleString(pythonCode);
+
+    PyObject *pyString = PyDict_GetItemString(PyModule_GetDict(PyImport_AddModule("__main__")), "example_string");
+    const char *cppString = PyUnicode_AsUTF8(pyString);
+    return cppString;
 }

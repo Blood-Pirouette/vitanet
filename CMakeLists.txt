@@ -27,9 +27,9 @@ include("${VITASDK}/share/vita.cmake" REQUIRED)
 set(VITA_APP_NAME "Vitanet")
 # Unique ID must be exactly 9 characters. Recommended: XXXXYYYYY where X =
 # unique string of developer and Y = a unique number for this app
-set(VITA_TITLEID  "VSDK00006")
+set(VITA_TITLEID "VSDK00006")
 # Optional version string to show in LiveArea's more info screen
-set(VITA_VERSION  "01.00")
+set(VITA_VERSION "01.00")
 
 
 ## Flags and includes for building
@@ -45,8 +45,7 @@ set(PSVITAIP "192.168.12.87" CACHE STRING "PSVita IP (for FTP access)")
 
 # Add any additional include paths here
 include_directories(
-  ${wo}
-  ${CMAKE_SOURCE_DIR}/src/includes/html-parser/include
+
 )
 
 
@@ -54,19 +53,9 @@ include_directories(
 # ${CMAKE_CURRENT_BINARY_DIR} lets you use any library currently being built
 link_directories(
   ${CMAKE_CURRENT_BINARY_DIR}
-
 )
 
 
-# Define the root source directory
-set(SRC_DIR ${CMAKE_SOURCE_DIR}/src/includes)
-
-
-
-# Collect all .cpp and .h files recursively
-file(GLOB_RECURSE SOURCES "${SRC_DIR}/*.c" "${SRC_DIR}/*.h")
-
-# Add executable with the collected sources
 
 ## Build and link
 # Add all the files needed to compile here
@@ -74,42 +63,43 @@ add_executable(${PROJECT_NAME}
   src/main.cpp
   src/classes/book_class.cpp
   src/services/scraper.hpp
-  ${SOURCES}
-
 )
 
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.
 target_link_libraries(${PROJECT_NAME}
-debugnet
-vita2d
-freetype
-png
-jpeg
-z
-m
-c
-bz2
-curl
-ssl
-crypto
-ScePgf_stub
-ScePvf_stub
-SceGxm_stub
-SceCtrl_stub
-SceTouch_stub
-SceAppUtil_stub
-SceDisplay_stub
-SceLibKernel_stub
-SceSysmodule_stub
-ScePower_stub
-SceCommonDialog_stub
-SceRegistryMgr_stub
-pthread
-SceAppMgr_stub
-SceHttp_stub
-SceNet_stub
-SceNetCtl_stub
+  python3.11
+  debugnet
+  vita2d
+  freetype
+  png
+  jpeg
+  c
+  bz2
+  curl
+  ssl
+  crypto
+  ScePgf_stub
+  ScePvf_stub
+  SceGxm_stub
+  SceCtrl_stub
+  SceTouch_stub
+  SceAppUtil_stub
+  SceDisplay_stub
+  SceLibKernel_stub
+  SceSysmodule_stub
+  ScePower_stub
+  SceCommonDialog_stub
+  SceRegistryMgr_stub
+  SceAppMgr_stub
+  SceHttp_stub
+  SceNet_stub
+  SceNetCtl_stub
+  pthread
+  mpdec
+  z
+  m
+ 
 )
 
 ## Create Vita files
@@ -128,9 +118,8 @@ vita_create_vpk(${PROJECT_NAME}.vpk ${VITA_TITLEID} eboot.bin
 
 
 add_custom_target(send ALL
-                  COMMAND echo destroy | nc ${PSVITAIP} 1338
-                  COMMAND curl -T eboot.bin ftp://${PSVITAIP}:1337/ux0:/app/${VITA_TITLEID}/
-                  COMMAND echo launch ${VITA_TITLEID} | nc ${PSVITAIP} 1338
-                  DEPENDS ${PROJECT_NAME}.vpk-vpk
-                  )
-
+  COMMAND echo destroy | nc ${PSVITAIP} 1338
+  COMMAND curl -T eboot.bin ftp://${PSVITAIP}:1337/ux0:/app/${VITA_TITLEID}/
+  COMMAND echo launch ${VITA_TITLEID} | nc ${PSVITAIP} 1338
+  DEPENDS ${PROJECT_NAME}.vpk-vpk
+)
