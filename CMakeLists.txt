@@ -31,11 +31,21 @@ set(VITA_TITLEID "VSDK00006")
 # Optional version string to show in LiveArea's more info screen
 set(VITA_VERSION "01.00")
 
+#-std=c++11
+##set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+
+
+add_compile_options(
+  -Ofast -std=gnu11
+  -Wall -Wextra -Wdouble-promotion -Wshadow -Wundef
+  -fsingle-precision-constant -fno-common
+)
+
+
 
 ## Flags and includes for building
 # Note that we make sure not to overwrite previous flags
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 # Optional. You can specify more param.sfo flags this way.
 set(VITA_MKSFOEX_FLAGS "${VITA_MKSFOEX_FLAGS} -d PARENTAL_LEVEL=1")
 set(PSVITAIP "192.168.12.87" CACHE STRING "PSVita IP (for FTP access)")
@@ -45,7 +55,7 @@ set(PSVITAIP "192.168.12.87" CACHE STRING "PSVita IP (for FTP access)")
 
 # Add any additional include paths here
 include_directories(
-
+  "$ENV{VITASDK}/arm-vita-eabi/include/python2.7"
 )
 
 
@@ -65,20 +75,19 @@ add_executable(${PROJECT_NAME}
   src/services/scraper.hpp
 )
 
+find_package(OpenSSL REQUIRED)
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.
 target_link_libraries(${PROJECT_NAME}
-  python3.11
+  python2.7
+  pthread
   debugnet
+  curl
   vita2d
   freetype
   png
   jpeg
-  c
   bz2
-  curl
-  ssl
-  crypto
   ScePgf_stub
   ScePvf_stub
   SceGxm_stub
@@ -95,11 +104,11 @@ target_link_libraries(${PROJECT_NAME}
   SceHttp_stub
   SceNet_stub
   SceNetCtl_stub
-  pthread
+  ${OPENSSL_LIBRARIES}
   mpdec
   z
   m
- 
+  c
 )
 
 ## Create Vita files
@@ -114,6 +123,7 @@ vita_create_vpk(${PROJECT_NAME}.vpk ${VITA_TITLEID} eboot.bin
   FILE sce_sys/livearea/contents/bg.png sce_sys/livearea/contents/bg.png
   FILE sce_sys/livearea/contents/startup.png sce_sys/livearea/contents/startup.png
   FILE sce_sys/livearea/contents/template.xml sce_sys/livearea/contents/template.xml
+  FILE "$ENV{VITASDK}/arm-vita-eabi/lib/python27.zip" lib/python27.zip
 )
 
 

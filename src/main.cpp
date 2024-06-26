@@ -38,7 +38,7 @@ void booksInit(vector<Book> &books);
 // global variable
 vita2d_font *text_font;
 
-int main(int argc, char *argv[])
+int main()
 {
 	SceCtrlData pad;	// Will be used to monitor trackpad presses
 	vector<Book> books; // A list called books of Book objects
