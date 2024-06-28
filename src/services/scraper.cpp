@@ -16,9 +16,15 @@ string getTitle(const char *markup)
 	setenv("HOME", "app0:", 1);
 
 	Py_Initialize();
-
 	PySys_SetPath("app0:lib/python27.zip;app0:lib/python2.7;ux0:/data/lib/python27.zip;ux0:/data/lib/python2.7");
-	PyRun_SimpleString("print 'Hello Python!'\n");
+
+	FILE *fp;
+	fp = fopen("app0:lib/services/scraper.py", "r");
+	
+	PyRun_SimpleFile(fp, "scraper.py");
+
 	Py_Finalize();
+
+	fclose(fp);
 	return "Hello Python!";
 }

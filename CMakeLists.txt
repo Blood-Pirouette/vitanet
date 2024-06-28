@@ -110,6 +110,7 @@ vita_create_vpk(${PROJECT_NAME}.vpk ${VITA_TITLEID} eboot.bin
   FILE sce_sys/livearea/contents/bg.png sce_sys/livearea/contents/bg.png
   FILE sce_sys/livearea/contents/startup.png sce_sys/livearea/contents/startup.png
   FILE sce_sys/livearea/contents/template.xml sce_sys/livearea/contents/template.xml
+  FILE src/services/scraper.py lib/services/scraper.py
   FILE $ENV{VITASDK}/arm-vita-eabi/lib/python27.zip lib/python27.zip
 )
 
@@ -117,6 +118,7 @@ vita_create_vpk(${PROJECT_NAME}.vpk ${VITA_TITLEID} eboot.bin
 add_custom_target(send ALL
   COMMAND echo destroy | nc ${PSVITAIP} 1338
   COMMAND curl -T eboot.bin ftp://${PSVITAIP}:1337/ux0:/app/${VITA_TITLEID}/
+  COMMAND curl -T ${CMAKE_CURRENT_SOURCE_DIR}/src/services/scraper.py ftp://${PSVITAIP}:1337/ux0:/app/${VITA_TITLEID}/lib/services/
   COMMAND echo launch ${VITA_TITLEID} | nc ${PSVITAIP} 1338
   DEPENDS ${PROJECT_NAME}.vpk-vpk
 )
