@@ -4,24 +4,21 @@
 #include <algorithm>
 #include <iostream>
 #include <string.h>
-#include <python2.7/Python.h>
-
-
+#include <Python.h>
 
 using namespace std;
 
 string getTitle(const char *markup)
 {
-
+	Py_NoSiteFlag = 1;
 	Py_SetProgramName("app0:eboot.bin");
 	setenv("PYTHONHOME", "app0:", 1);
+	setenv("HOME", "app0:", 1);
+
 	Py_Initialize();
-	PyRun_SimpleString("import sys\nsys.path.append('ux0:/data/lib/python2.7')\nsys.path.append('ux0:/data/lib/python27.zip')\n");  // Add support for External Modules
-	PyRun_SimpleString("import os\n");
-	PyRun_SimpleString("print os.name\n");
-	PyRun_SimpleString("print sys.platform\n");
-	PyRun_SimpleString("print sys.path\n");
-	PyRun_SimpleString("print sys.builtin_module_names\n");
+
+	PySys_SetPath("app0:lib/python27.zip;app0:lib/python2.7;ux0:/data/lib/python27.zip;ux0:/data/lib/python2.7");
+	PyRun_SimpleString("print 'Hello Python!'\n");
 	Py_Finalize();
-	return "";
+	return "Hello Python!";
 }

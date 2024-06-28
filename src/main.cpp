@@ -24,6 +24,7 @@
 #include "classes/book_class.cpp"
 #include "services/libcurl.cpp"
 
+
 // namespace
 using namespace std;
 
@@ -40,6 +41,7 @@ vita2d_font *text_font;
 
 int main()
 {
+
 	SceCtrlData pad;	// Will be used to monitor trackpad presses
 	vector<Book> books; // A list called books of Book objects
 	int selection = 0;	// Used to track user selection

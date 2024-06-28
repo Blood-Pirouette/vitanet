@@ -4,7 +4,8 @@
             "name": "VitaSDK",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/usr/include"
+                "/usr/include",
+                "/opt/vitasdk/arm-vita-eabi/include/python2.7"
             ],
             "defines": [],
             "compilerPath": "/opt/vitasdk/bin/arm-vita-eabi-gcc",
