@@ -35,7 +35,7 @@ set(VITA_VERSION "01.00")
 
 add_compile_options(
   -Ofast -std=gnu11
-  -Wall -Wextra -Wdouble-promotion -Wshadow -Wundef
+  -Wall -Wextra -Wdouble-promotion -Wshadow -Wundef -Wno-write-strings -Wno-unused-parameter
   -fsingle-precision-constant -fno-common
 )
 

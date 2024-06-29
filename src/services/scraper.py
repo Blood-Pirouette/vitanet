@@ -1,1 +1,1 @@
-print('Hello Python!')
+my_string = "Hello from Python"
