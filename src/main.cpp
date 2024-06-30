@@ -115,7 +115,7 @@ int main()
 
 string scrape_site(char *buffer)
 {
-	const char *file = "ux0:data/vitanet/index2.html";
+	const char *file = "ux0:data/vitanet/index.html";
 	SceUID fd = sceIoOpen(file, SCE_O_RDONLY, 0777);
 	sceIoRead(fd, buffer, BUFFER_SIZE);
 	buffer[BUFFER_SIZE - 1] = '\0';
