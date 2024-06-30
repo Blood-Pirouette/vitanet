@@ -3,6 +3,15 @@ from bs4 import BeautifulSoup
 # The variable markup exists in the global namespace before execution
 soup = BeautifulSoup(markup, 'html.parser')
 
+categories = soup.find('ul', class_='nav nav-list')
+
+category_items = categories.find_all('li')
+print(type(category_items))
+for item in category_items:
+    print(type(item.text))
+    print(item.text)
+
+
 # Extract the title of the webpage
 title_object = soup.title
 if title_object:

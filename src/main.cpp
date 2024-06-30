@@ -115,12 +115,19 @@ int main()
 
 string scrape_site(char *buffer)
 {
+	// Declare local variables
+	vector<string> result_array;
+	string error;
 	const char *file = "ux0:data/vitanet/index.html";
+
+	// File handling
 	SceUID fd = sceIoOpen(file, SCE_O_RDONLY, 0777);
 	sceIoRead(fd, buffer, BUFFER_SIZE);
 	buffer[BUFFER_SIZE - 1] = '\0';
-	string title = getTitle(buffer);
-	return title;
+
+	// Scrape site and get results
+	error = getTitle(&result_array, buffer);
+	return error;
 }
 
 void booksInit(vector<Book> &books)
