@@ -1,4 +1,3 @@
-
 #include <assert.h>
 #include <algorithm>
 #include <vector>
@@ -8,13 +7,15 @@
 #include <stdlib.h>
 
 #include <Python.h>
+#include "scraper.hpp"
+#include "../classes/category_class.hpp"
 
 using namespace std;
 
 string convert_to_python(const char *markup, PyObject *p_global_dict)
 {
 
-	// Set the C++ string as a Python variable in the global dictionary
+	// Set the C++ string as a Python variable in the global namespace
 	PyObject *p_markup = PyString_FromString(markup);
 	if (p_markup == nullptr)
 	{
@@ -26,24 +27,25 @@ string convert_to_python(const char *markup, PyObject *p_global_dict)
 	Py_DECREF(p_markup);
 	return "";
 }
-string recieve_from_python(vector<string> *result_array, PyObject *p_global_dict)
+string recieve_from_python(vector<Category> *categories, PyObject *p_global_dict)
 {
 	// Get the string variable from the global dictionary
-	PyObject *p_result = PyDict_GetItemString(p_global_dict, "category_items");
+	PyObject *p_result = PyDict_GetItemString(p_global_dict, "category_items_text");
 
-	// Check pValue is not null and that it is a string
+	// Check p_result exists and is a list
 	if (p_result && PyList_Check(p_result))
 	{
 		// Convert the Python list to a C++ vector of strings
-		for (Py_ssize_t i = 0; i < PyList_Size(p_result); ++i)
+		for (int i = 0; i < PyList_Size(p_result); ++i)
 		{
 			PyObject *p_item = PyList_GetItem(p_result, i);
-			if (PyString_Check(p_item))
+			PyObject *p_item_str = PyObject_Str(p_item);
+			if (PyString_Check(p_item_str))
 			{
-				result_array->push_back(PyString_AsString(p_item));
+				Category new_category(PyString_AsString(p_item_str), "placeholder");
+				categories->push_back(new_category);
 			}
 		}
-
 		return "Success";
 	}
 	else
@@ -53,7 +55,7 @@ string recieve_from_python(vector<string> *result_array, PyObject *p_global_dict
 	return "";
 }
 
-string getTitle(vector<string> *result_array, const char *markup)
+string getCategory(vector<Category> *categories, const char *markup)
 {
 	// Declare local variables
 	vector<string> result;
@@ -79,7 +81,7 @@ string getTitle(vector<string> *result_array, const char *markup)
 	// Get the result of the scraping from the python script
 	PyRun_SimpleFile(py_script, "scraper.py");
 	fclose(py_script);
-	error = recieve_from_python(result_array, p_global_dict);
+	error = recieve_from_python(categories, p_global_dict);
 
 	// Return result
 	Py_Finalize();

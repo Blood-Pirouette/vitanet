@@ -20,8 +20,8 @@
 #include <psp2/net/net.h>
 #include <psp2/net/netctl.h>
 
-#include "services/scraper.hpp"
-#include "classes/book_class.cpp"
+#include "services/scraper.cpp"
+#include "classes/category_class.hpp"
 #include "services/libcurl.cpp"
 
 
@@ -33,8 +33,7 @@ const int BUFFER_SIZE = 100 * 1024;
 
 // function prototypes
 // void netInit();
-string scrape_site(char *);
-void booksInit(vector<Book> &books);
+string categoriesInit(vector<Category>*, char*);
 
 // global variable
 vita2d_font *text_font;
@@ -43,7 +42,7 @@ int main()
 {
 
 	SceCtrlData pad;	// Will be used to monitor trackpad presses
-	vector<Book> books; // A list called books of Book objects
+	vector<Category> categories; // A list called categories of Category objects
 	int selection = 0;	// Used to track user selection
 
 	/* Initialize the screen */
@@ -53,11 +52,10 @@ int main()
 	vita2d_set_clear_color(RGBA8(0, 0, 0, 255));
 	text_font = vita2d_load_font_file("app0:assets/font.ttf");
 
-	/*Initialize the books list*/
-	booksInit(books);
+	/*Initialize the categories list*/
 	char htmlbuffer[BUFFER_SIZE];
 
-	string title = scrape_site(htmlbuffer);
+	string error = categoriesInit(&categories,htmlbuffer);
 
 	// Continuously Draw Choices and Keep Track of Selection
 	while (true)
@@ -66,7 +64,7 @@ int main()
 		vita2d_start_drawing();
 		vita2d_clear_screen();
 		vita2d_font_draw_text(text_font, 200, 60, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, "Books");
-		vita2d_font_draw_text(text_font, 200, 90, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, title.c_str());
+		vita2d_font_draw_text(text_font, 200, 90, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, error.c_str());
 
 		/* Track User Pressing UP/DOWN/CROSS with the selection variable */
 		sceCtrlPeekBufferPositive(0, &pad, 1);
@@ -81,23 +79,23 @@ int main()
 		}
 		else if (pad.buttons & SCE_CTRL_CROSS)
 		{
-			// open books page
+			// open category page
 		}
 		if (selection > 4 || selection < 0)
 		{
 			selection = 0;
 		}
 
-		/* Every frame draw all title for each Book object in the books list */
-		for (int i = 0; i < 5; i++)
+		/* Every frame draw all title for each Category object in the categories list */
+		for (int i = 1; i < categories.size(); i++)
 		{
 			if (i == selection)
 			{
-				vita2d_font_draw_text(text_font, 200, 100 + (i * 50), RGBA8(0x0A, 0xC0, 0x2B, 0xFF), 10, books[i].title.c_str());
+				vita2d_font_draw_text(text_font, 200, 100 + (i * 50), RGBA8(0x0A, 0xC0, 0x2B, 0xFF), 10, categories[i].name.c_str());
 			}
 			else
 			{
-				vita2d_font_draw_text(text_font, 200, 100 + (i * 50), RGBA8(0xFF, 0xFF, 0xFF, 0xFF), 10, books[i].title.c_str());
+				vita2d_font_draw_text(text_font, 200, 100 + (i * 50), RGBA8(0xFF, 0xFF, 0xFF, 0xFF), 10, categories[i].name.c_str());
 			}
 		}
 
@@ -113,10 +111,8 @@ int main()
 	return 0;
 }
 
-string scrape_site(char *buffer)
+string categoriesInit(vector<Category>* categories, char *buffer)
 {
-	// Declare local variables
-	vector<string> result_array;
 	string error;
 	const char *file = "ux0:data/vitanet/index.html";
 
@@ -126,18 +122,8 @@ string scrape_site(char *buffer)
 	buffer[BUFFER_SIZE - 1] = '\0';
 
 	// Scrape site and get results
-	error = getTitle(&result_array, buffer);
+	error = getCategory(categories, buffer);
 	return error;
 }
 
-void booksInit(vector<Book> &books)
-{
-	for (int i = 0; i < 5; i++)
-	{
-		Book new_book(to_string(i), "placeholder");
-		books.push_back(new_book);
-	}
-	books[0].book_url = "book1.html";
-	books[1].book_url = "book2.html";
-	books[2].book_url = "book3.html";
-}
+

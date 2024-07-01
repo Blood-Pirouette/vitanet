@@ -6,10 +6,10 @@ soup = BeautifulSoup(markup, 'html.parser')
 categories = soup.find('ul', class_='nav nav-list')
 
 category_items = categories.find_all('li')
-print(type(category_items))
+category_items_text = []
 for item in category_items:
-    print(type(item.text))
-    print(item.text)
+    cleaned_text = ' '.join(item.text.split())
+    category_items_text.append(cleaned_text)
 
 
 # Extract the title of the webpage
