@@ -24,16 +24,19 @@
 #include "classes/category_class.hpp"
 #include "services/libcurl.cpp"
 
-
 // namespace
 using namespace std;
 
 // constant macro
 const int BUFFER_SIZE = 100 * 1024;
+const int X_POS = 50;
+const int HEADER_TXT_SIZE = 32;
+const int LIST_TXT_SIZE = 20;
+const int NO_LISTS_PAGE = 8;
 
 // function prototypes
 // void netInit();
-string categoriesInit(vector<Category>*, char*);
+string categoriesInit(vector<Category> *, char *);
 
 // global variable
 vita2d_font *text_font;
@@ -41,9 +44,10 @@ vita2d_font *text_font;
 int main()
 {
 
-	SceCtrlData pad;	// Will be used to monitor trackpad presses
+	SceCtrlData pad;			 // Will be used to monitor trackpad presses
 	vector<Category> categories; // A list called categories of Category objects
-	int selection = 0;	// Used to track user selection
+	int selection = 0;			 // Used to track user selection
+	int page = 0;				 // Used to track current list page
 
 	/* Initialize the screen */
 	// netInit();
@@ -55,47 +59,59 @@ int main()
 	/*Initialize the categories list*/
 	char htmlbuffer[BUFFER_SIZE];
 
-	string error = categoriesInit(&categories,htmlbuffer);
+	string error = categoriesInit(&categories, htmlbuffer);
 
-	// Continuously Draw Choices and Keep Track of Selection
+	// Continuously draw choices and keep track of selection
 	while (true)
 	{
 		/* Every frame Draw The Title */
 		vita2d_start_drawing();
 		vita2d_clear_screen();
-		vita2d_font_draw_text(text_font, 200, 60, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, "Books");
-		vita2d_font_draw_text(text_font, 200, 90, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, error.c_str());
+		vita2d_font_draw_text(text_font, X_POS, 60, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), HEADER_TXT_SIZE, "Books");
+		vita2d_font_draw_text(text_font, X_POS, 90, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), HEADER_TXT_SIZE, to_string(selection).c_str());
+		/* Track current page */
+		int list_start = page * NO_LISTS_PAGE + 1;	   // Track the beginning of the list
+		int list_end = NO_LISTS_PAGE * (page + 1) + 1; // Track the end of the list
 
-		/* Track User Pressing UP/DOWN/CROSS with the selection variable */
+		/* Track user input with the selection variable */
 		sceCtrlPeekBufferPositive(0, &pad, 1);
 		if (pad.buttons & SCE_CTRL_DOWN)
 		{
-
-			selection += 1;
+			selection++;
 		}
 		else if (pad.buttons & SCE_CTRL_UP)
 		{
-			selection -= 1;
+			selection--;
+		}
+		else if (pad.buttons & SCE_CTRL_RIGHT)
+		{
+			page++;
+			selection = list_start;
 		}
 		else if (pad.buttons & SCE_CTRL_CROSS)
 		{
 			// open category page
 		}
-		if (selection > 4 || selection < 0)
+		// Check if we reached the beginning of the list or the end
+		if (selection < list_start || selection > list_end)
 		{
-			selection = 0;
+			selection = list_start;
 		}
-
+		// Check if list_end reaches out of categories range
+		if (list_end >= categories.size())
+		{
+			list_end = categories.size() - 1;
+		}
 		/* Every frame draw all title for each Category object in the categories list */
-		for (int i = 1; i < categories.size(); i++)
+		for (int i = list_start; i < list_end; i++)
 		{
 			if (i == selection)
 			{
-				vita2d_font_draw_text(text_font, 200, 100 + (i * 50), RGBA8(0x0A, 0xC0, 0x2B, 0xFF), 10, categories[i].name.c_str());
+				vita2d_font_draw_text(text_font, X_POS, 100 + ((i - page * NO_LISTS_PAGE) * 50), RGBA8(0x0A, 0xC0, 0x2B, 0xFF), LIST_TXT_SIZE, categories[i].name.c_str());
 			}
 			else
 			{
-				vita2d_font_draw_text(text_font, 200, 100 + (i * 50), RGBA8(0xFF, 0xFF, 0xFF, 0xFF), 10, categories[i].name.c_str());
+				vita2d_font_draw_text(text_font, X_POS, 100 + ((i - page * NO_LISTS_PAGE) * 50), RGBA8(0xFF, 0xFF, 0xFF, 0xFF), LIST_TXT_SIZE, categories[i].name.c_str());
 			}
 		}
 
@@ -111,7 +127,7 @@ int main()
 	return 0;
 }
 
-string categoriesInit(vector<Category>* categories, char *buffer)
+string categoriesInit(vector<Category> *categories, char *buffer)
 {
 	string error;
 	const char *file = "ux0:data/vitanet/index.html";
@@ -125,5 +141,3 @@ string categoriesInit(vector<Category>* categories, char *buffer)
 	error = getCategory(categories, buffer);
 	return error;
 }
-
-
