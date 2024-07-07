@@ -12,33 +12,27 @@
 
 using namespace std;
 
-string convert_to_python(const char *markup, PyObject *p_global_dict)
+string recieve_categories_from_python(const char *markup, vector<Category> *categories, PyObject *p_main_module)
 {
-
-	// Set the C++ string as a Python variable in the global namespace
+	// Get the string variable from the global dictionary
+	// PyObject *p_result = PyDict_GetItemString(p_global_dict, "category_items_text");
+	PyObject *p_func = PyObject_GetAttrString(p_main_module, "get_categories");
+	return "No Error";
 	PyObject *p_markup = PyString_FromString(markup);
 	if (p_markup == nullptr)
 	{
 		Py_Finalize();
 		return "Failed to create Python string from C++ string";
 	}
-
-	PyDict_SetItemString(p_global_dict, "markup", p_markup);
-	Py_DECREF(p_markup);
-	return "";
-}
-string recieve_from_python(vector<Category> *categories, PyObject *p_global_dict)
-{
-	// Get the string variable from the global dictionary
-	PyObject *p_result = PyDict_GetItemString(p_global_dict, "category_items_text");
-
-	// Check p_result exists and is a list
-	if (p_result && PyList_Check(p_result))
+	// Check p_func exists and is a callable function
+	if (p_func && PyCallable_Check(p_func))
 	{
+
+		PyObject *p_category_list = PyObject_CallObject(p_func, p_markup);
 		// Convert the Python list to a C++ vector of strings
-		for (int i = 0; i < PyList_Size(p_result); ++i)
+		for (int i = 0; i < PyList_Size(p_category_list); ++i)
 		{
-			PyObject *p_item = PyList_GetItem(p_result, i);
+			PyObject *p_item = PyList_GetItem(p_category_list, i);
 			PyObject *p_item_str = PyObject_Str(p_item);
 			if (PyString_Check(p_item_str))
 			{
@@ -75,15 +69,12 @@ string getCategory(vector<Category> *categories, const char *markup)
 	PyObject *p_main_module = PyImport_AddModule("__main__");
 	PyObject *p_global_dict = PyModule_GetDict(p_main_module);
 
-	// Pass HTML markup for scraping to python script
-	error = convert_to_python(markup, p_global_dict);
-
 	// Get the result of the scraping from the python script
 	PyRun_SimpleFile(py_script, "scraper.py");
 	fclose(py_script);
-	error = recieve_from_python(categories, p_global_dict);
+	error = recieve_categories_from_python(markup, categories, p_main_module);
 
 	// Return result
 	Py_Finalize();
-	return error;
+	return "";
 }

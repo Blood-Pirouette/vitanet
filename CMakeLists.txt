@@ -44,7 +44,7 @@ add_compile_options(
 # Note that we make sure not to overwrite previous flags
 # Optional. You can specify more param.sfo flags this way.
 set(VITA_MKSFOEX_FLAGS "${VITA_MKSFOEX_FLAGS} -d PARENTAL_LEVEL=1")
-set(PSVITAIP "192.168.127.169" CACHE STRING "PSVita IP (for FTP access)")
+set(PSVITAIP "192.168.67.169" CACHE STRING "PSVita IP (for FTP access)")
 
 
 # Add any additional include paths here

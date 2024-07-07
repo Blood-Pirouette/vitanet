@@ -85,7 +85,10 @@ int main()
 		}
 		else if (pad.buttons & SCE_CTRL_RIGHT)
 		{
-			page++;
+			if (list_end < categories.size())
+			{
+				page++;
+			}
 			selection = list_start;
 		}
 		else if (pad.buttons & SCE_CTRL_CROSS)
@@ -93,7 +96,7 @@ int main()
 			// open category page
 		}
 		// Check if we reached the beginning of the list or the end
-		if (selection < list_start || selection > list_end)
+		if (selection < list_start || selection >= list_end)
 		{
 			selection = list_start;
 		}

@@ -10,7 +10,6 @@
 using namespace std;
 
 string getCategory(vector<Category>*, const char *);
-string convert_to_python(const char *, PyObject *);
-string recieve_from_python(vector<Category>*, PyObject *);
+string recieve_categories_from_python(const char*, vector<Category>*, PyObject *);
  
  #endif
