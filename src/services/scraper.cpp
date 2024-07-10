@@ -17,18 +17,25 @@ string recieve_categories_from_python(const char *markup, vector<Category> *cate
 	// Get the string variable from the global dictionary
 	// PyObject *p_result = PyDict_GetItemString(p_global_dict, "category_items_text");
 	PyObject *p_func = PyObject_GetAttrString(p_main_module, "get_categories");
-	return "No Error";
 	PyObject *p_markup = PyString_FromString(markup);
+
 	if (p_markup == nullptr)
 	{
 		Py_Finalize();
 		return "Failed to create Python string from C++ string";
 	}
+
 	// Check p_func exists and is a callable function
 	if (p_func && PyCallable_Check(p_func))
 	{
 
-		PyObject *p_category_list = PyObject_CallObject(p_func, p_markup);
+
+		PyObject *p_markup = PyString_FromString(markup);
+		PyObject *p_args = PyTuple_New(1);
+		PyTuple_SetItem(p_args, 0, p_markup); // p_args owns p_markup now
+		
+		PyObject *p_category_list = PyObject_CallObject(p_func, p_args);
+
 		// Convert the Python list to a C++ vector of strings
 		for (int i = 0; i < PyList_Size(p_category_list); ++i)
 		{

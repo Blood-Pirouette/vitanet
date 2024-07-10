@@ -12,4 +12,4 @@ using namespace std;
 string getCategory(vector<Category>*, const char *);
 string recieve_categories_from_python(const char*, vector<Category>*, PyObject *);
  
- #endif
+#endif
