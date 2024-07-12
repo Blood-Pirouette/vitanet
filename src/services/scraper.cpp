@@ -32,8 +32,7 @@ string recieve_categories_from_python(const char *markup, vector<Category> *cate
 
 		PyObject *p_markup = PyString_FromString(markup);
 		PyObject *p_args = PyTuple_New(1);
-		PyTuple_SetItem(p_args, 0, p_markup); // p_args owns p_markup now
-		
+		PyTuple_SetItem(p_args, 0, p_markup);
 		PyObject *p_category_list = PyObject_CallObject(p_func, p_args);
 
 		// Convert the Python list to a C++ vector of strings
@@ -43,7 +42,7 @@ string recieve_categories_from_python(const char *markup, vector<Category> *cate
 			PyObject *p_item_str = PyObject_Str(p_item);
 			if (PyString_Check(p_item_str))
 			{
-				Category new_category(PyString_AsString(p_item_str), "placeholder");
+				Category new_category(PyString_AsString(p_item_str), "URL Holder");
 				categories->push_back(new_category);
 			}
 		}
