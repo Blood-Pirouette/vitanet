@@ -29,20 +29,31 @@ string recieve_categories_from_python(const char *markup, vector<Category> *cate
 	if (p_func && PyCallable_Check(p_func))
 	{
 
-
 		PyObject *p_markup = PyString_FromString(markup);
 		PyObject *p_args = PyTuple_New(1);
 		PyTuple_SetItem(p_args, 0, p_markup);
+
+		// Call function
 		PyObject *p_category_list = PyObject_CallObject(p_func, p_args);
 
 		// Convert the Python list to a C++ vector of strings
 		for (int i = 0; i < PyList_Size(p_category_list); ++i)
 		{
 			PyObject *p_item = PyList_GetItem(p_category_list, i);
-			PyObject *p_item_str = PyObject_Str(p_item);
-			if (PyString_Check(p_item_str))
+			if (PyTuple_Check(p_item) && PyTuple_Size(p_item) == 2)
 			{
-				Category new_category(PyString_AsString(p_item_str), "URL Holder");
+				// Extract the title
+				PyObject *p_title = PyTuple_GetItem(p_item, 0);
+				PyObject *p_title_str = PyObject_Str(p_title);
+				const char *title = PyString_AsString(p_title_str);
+
+				// Extract the URL
+				PyObject *p_url = PyTuple_GetItem(p_item, 1);
+				PyObject *p_url_str = PyObject_Str(p_url);
+				const char *url = PyString_AsString(p_url_str);
+
+				// Create a category
+				Category new_category(title, url);
 				categories->push_back(new_category);
 			}
 		}
