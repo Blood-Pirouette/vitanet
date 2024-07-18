@@ -91,6 +91,14 @@ int main()
 			}
 			selection = list_start;
 		}
+		else if (pad.buttons & SCE_CTRL_LEFT)
+		{
+			if (page > 0)
+			{
+				page--;
+			}
+			selection = list_start;
+		}
 		else if (pad.buttons & SCE_CTRL_CROSS)
 		{
 			// open category page
