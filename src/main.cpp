@@ -101,7 +101,7 @@ int main()
 		}
 		else if (pad.buttons & SCE_CTRL_CROSS)
 		{
-			// open category page
+			vita2d_font_draw_text(text_font, X_POS, 100, RGBA8(0x0A, 0xC0, 0x2B, 0xFF), LIST_TXT_SIZE, categories[selection].category_url.c_str());
 		}
 		// Check if we reached the beginning of the list or the end
 		if (selection < list_start || selection >= list_end)
