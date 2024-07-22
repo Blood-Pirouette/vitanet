@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
 #include <Python.h>
 #include "../classes/category_class.hpp"
 
