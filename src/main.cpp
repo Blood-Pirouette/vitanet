@@ -13,7 +13,7 @@
 #include "services/scraper.cpp"
 #include "services/libcurl.cpp"
 // Include screens
-#include "screens/main_page.cpp"
+#include "screens/main_screen.cpp"
 
 
 // namespace

@@ -1,4 +1,4 @@
-#include "main_page.hpp"
+#include "main_screen.hpp"
 
 // namespace
 using namespace std;
