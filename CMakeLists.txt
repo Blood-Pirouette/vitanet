@@ -59,7 +59,9 @@ add_executable(${PROJECT_NAME}
   src/main.cpp
   src/classes/category_class.hpp
   src/services/scraper.hpp
-  src/screens/main_screen.hpp
+  src/services/ime.h
+  src/screens/home_screen.hpp
+  src/screens/search_screen.hpp
 )
 
 
@@ -90,6 +92,7 @@ target_link_libraries(${PROJECT_NAME}
   SceHttp_stub
   SceNet_stub
   SceNetCtl_stub
+  SceIme_stub
   ssl
   crypto
   mpdec

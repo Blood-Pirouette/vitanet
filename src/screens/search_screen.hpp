@@ -1,5 +1,5 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef SEARCH_H
+#define SEARCH_H
 
 // standard libraries
 #include <vector>
