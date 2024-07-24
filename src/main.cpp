@@ -28,8 +28,9 @@ string categoriesInit(vector<Category> *, char *);
 
 int main()
 {
+	uint8_t utf8_user_input[SCE_IME_MAX_TEXT_LENGTH + 1] = {0};
 	vector<Category> categories; // A list called categories of Category objects
-	int selection;				 // Used to track user selection
+	int selection;	 // Used to track user selection
 
 	// Initialize the network and the screen
 	download();
@@ -40,8 +41,9 @@ int main()
 	homePage();
 
 	// Show the search screen
-	char *user_input = "";
-	getUserInput();
+	getUserInput(utf8_user_input);
+	char* user_input = (char*)utf8_user_input;
+	cout << "The user input is:" << user_input;
 
 	// Initialize the categories list
 	char htmlbuffer[BUFFER_SIZE];

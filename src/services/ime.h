@@ -11,6 +11,7 @@
 #include <psp2/sysmodule.h>  //sceSysmoduleLoadModule
 #include <psp2/display.h> //sceDisplayWaitVblankStart
 
-void getUserInput();
+void UTFConversion(uint8_t*, uint16_t*, int);
+void getUserInput(uint8_t*);
 
 #endif
