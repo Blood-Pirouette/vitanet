@@ -10,7 +10,7 @@
 // Include classes
 #include "classes/category_class.hpp"
 // Include services
-#include "services/ime.c"
+#include "services/ime.cpp"
 #include "services/libcurl.cpp"
 #include "services/scraper.cpp"
 // Include screens
@@ -22,28 +22,34 @@ using namespace std;
 
 // constant macro
 const int BUFFER_SIZE = 100 * 1024;
+string user_input_search;
+string url = "https://en.wikipedia.org/w/index.php?search=" + user_input_search + "&title=Special:Search&profile=advanced&fulltext=1&ns0=1";
 
 // function prototypes
 string categoriesInit(vector<Category> *, char *);
 
 int main()
 {
-	uint8_t utf8_user_input[SCE_IME_MAX_TEXT_LENGTH + 1] = {0};
+	char user_input[SCE_IME_MAX_TEXT_LENGTH + 1] = {0};
 	vector<Category> categories; // A list called categories of Category objects
-	int selection;	 // Used to track user selection
+	int selection;				 // Used to track user selection
 
 	// Initialize the network and the screen
-	download();
 	vita2d_init();
 	vita2d_set_clear_color(RGBA8(0, 0, 0, 255));
 
 	// show th home page
 	homePage();
 
-	// Show the search screen
-	getUserInput(utf8_user_input);
-	char* user_input = (char*)utf8_user_input;
-	cout << "The user input is:" << user_input;
+	// show the search screen
+	getUserInput(user_input);
+	while(true){
+		cout << user_input;
+	}
+
+	// download the user request
+	//user_input_search = user_input;
+	downloadPage(url, "/" + user_input_search);
 
 	// Initialize the categories list
 	char htmlbuffer[BUFFER_SIZE];

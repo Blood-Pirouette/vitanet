@@ -59,7 +59,7 @@ add_executable(${PROJECT_NAME}
   src/main.cpp
   src/classes/category_class.hpp
   src/services/scraper.hpp
-  src/services/ime.h
+  src/services/ime.hpp
   src/screens/home_screen.hpp
   src/screens/search_screen.hpp
 )

@@ -2,6 +2,7 @@
 #define IME_H
 
 #include <stdio.h>
+#include <cstring> //strcpy
 
 // vita2d library
 #include <vita2d.h>
@@ -10,8 +11,9 @@
 #include <psp2/libime.h> //SceImeOpen
 #include <psp2/sysmodule.h>  //sceSysmoduleLoadModule
 #include <psp2/display.h> //sceDisplayWaitVblankStart
+#include <codecvt>  //UTF conversion
+#include <locale> //UTF conversion
 
-void UTFConversion(uint8_t*, uint16_t*, int);
-void getUserInput(uint8_t*);
+void getUserInput(char*);
 
 #endif

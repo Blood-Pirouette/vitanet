@@ -11,6 +11,7 @@
 
 #include <psp2/io/fcntl.h>
 
+#include <iostream>
 #include <stdio.h>
 #include <malloc.h>
 #include <string.h>
@@ -63,6 +64,7 @@ void curlDownloadFile(std::string url , std::string file){
 	if(!imageFD){
 		return;
 	}
+	;
 
 	CURL *curl;
 	CURLcode res;
@@ -161,14 +163,31 @@ void httpTerm() {
 	sceSysmoduleUnloadModule(SCE_SYSMODULE_HTTP);
 }
 
-void download(){
+/*
+Call this function with the following parameters:
+url example: "https://google.com"
+directory example: "/mainpage" 
+mainpage directory will be created under ux0:data/vitanet and the 
+relevant index.html will be placed there
+*/
+void downloadPage(string url, string directory){
+	
+	// initialize network
 	netInit();
 	httpInit();
+	
+	// initialize directories
 	struct SceIoStat * dirStat = (SceIoStat*)malloc(sizeof(SceIoStat));
-	if(sceIoGetstat("ux0:data/vitanet" , dirStat) < 0){
-		sceIoMkdir("ux0:data/vitanet" , 0777);
+	const char* c_directory = ("ux0:data/vitanet"+directory).c_str();
+	const char* c_url = url.c_str();
+	if(sceIoGetstat(c_directory, dirStat) < 0){
+		sceIoMkdir(c_directory , 0777);
 	}
-	curlDownloadFile("https://books.toscrape.com/index.html",  "ux0:data/vitanet/index.html");
+
+	// download file
+	curlDownloadFile(url, "ux0:data/vitanet"+directory+"/index.html");
+	
+	// end network
 	httpTerm();
 	netTerm();
 }
