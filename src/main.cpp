@@ -32,7 +32,6 @@ int main()
 {
 	char user_input[SCE_IME_MAX_TEXT_LENGTH + 1] = {0};
 	vector<Category> categories; // A list called categories of Category objects
-	int selection;				 // Used to track user selection
 
 	// Initialize the network and the screen
 	vita2d_init();
@@ -43,12 +42,9 @@ int main()
 
 	// show the search screen
 	getUserInput(user_input);
-	while(true){
-		cout << user_input;
-	}
 
 	// download the user request
-	//user_input_search = user_input;
+	user_input_search = user_input;
 	downloadPage(url, "/" + user_input_search);
 
 	// Initialize the categories list
@@ -56,7 +52,7 @@ int main()
 	string error = categoriesInit(&categories, htmlbuffer);
 
 	// Start the main page
-	selection = searchResults(&categories);
+	int selection = searchResults(&categories);
 
 	// Exit the app
 	sceKernelExitProcess(0);
