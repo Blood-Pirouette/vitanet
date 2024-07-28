@@ -170,7 +170,7 @@ directory example: "/mainpage"
 mainpage directory will be created under ux0:data/vitanet and the 
 relevant index.html will be placed there
 */
-void downloadPage(string url, string directory){
+void searchArticle(string url, string directory){
 	
 	// initialize network
 	netInit();

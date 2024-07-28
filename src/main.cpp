@@ -1,5 +1,6 @@
 // standard libraries
 #include <vector>
+#include <stdlib.h>
 
 // vita2d library
 #include <vita2d.h>
@@ -7,13 +8,13 @@
 // psp2 libraries
 #include <psp2/kernel/threadmgr.h> //sceKernelExitProcess
 
-// Include classes
-#include "classes/category_class.hpp"
-// Include services
+// include classes
+#include "classes/search_result_class.hpp"
+// include services
 #include "services/ime.cpp"
 #include "services/libcurl.cpp"
 #include "services/scraper.cpp"
-// Include screens
+// include screens
 #include "screens/home_screen.cpp"
 #include "screens/search_screen.cpp"
 
@@ -21,55 +22,55 @@
 using namespace std;
 
 // constant macro
-const int BUFFER_SIZE = 100 * 1024;
+const int BUFFER_SIZE = 600 * 1024;
 string user_input_search;
-string url = "https://en.wikipedia.org/w/index.php?search=" + user_input_search + "&title=Special:Search&profile=advanced&fulltext=1&ns0=1";
 
 // function prototypes
-string categoriesInit(vector<Category> *, char *);
+void scrapeSearchResultPage(vector<Search_Result> *, string);
 
 int main()
 {
 	char user_input[SCE_IME_MAX_TEXT_LENGTH + 1] = {0};
-	vector<Category> categories; // A list called categories of Category objects
+	vector<Search_Result> search_results; // A list called search_results of Search_Result objects
 
 	// Initialize the network and the screen
 	vita2d_init();
 	vita2d_set_clear_color(RGBA8(0, 0, 0, 255));
 
-	// show th home page
+	// show the home page
 	homePage();
 
 	// show the search screen
 	getUserInput(user_input);
 
-	// download the user request
+	// find matching articles
 	user_input_search = user_input;
-	downloadPage(url, "/" + user_input_search);
+	string url = "https://en.wikipedia.org/w/index.php?search=" + user_input_search + "&title=Special:Search&profile=advanced&fulltext=1&ns0=1";
+	searchArticle(url, "/" + user_input_search);
 
-	// Initialize the categories list
-	char htmlbuffer[BUFFER_SIZE];
-	string error = categoriesInit(&categories, htmlbuffer);
+	// scrape the search results page
+	scrapeSearchResultPage(&search_results, user_input_search);
 
 	// Start the main page
-	int selection = searchResults(&categories);
+	int selection = searchResultsScreen(&search_results);
 
 	// Exit the app
 	sceKernelExitProcess(0);
 	return 0;
 }
 
-string categoriesInit(vector<Category> *categories, char *buffer)
-{
-	string error;
-	const char *file = "ux0:data/vitanet/index.html";
+void scrapeSearchResultPage(vector<Search_Result> *search_results, string file_directory)
+{	
+	// declare variables
+	char *htmlbuffer = (char*)malloc(BUFFER_SIZE);
+
+	string file_location = "ux0:data/vitanet/"+file_directory+"/index.html";
 
 	// File handling
-	SceUID fd = sceIoOpen(file, SCE_O_RDONLY, 0777);
-	sceIoRead(fd, buffer, BUFFER_SIZE);
-	buffer[BUFFER_SIZE - 1] = '\0';
+	SceUID fd = sceIoOpen(file_location.c_str(), SCE_O_RDONLY, 0777);
+	sceIoRead(fd, htmlbuffer, BUFFER_SIZE);
+	htmlbuffer[BUFFER_SIZE - 1] = '\0';
 
 	// Scrape site and get results
-	error = getCategory(categories, buffer);
-	return error;
+	getSearchResults(search_results, htmlbuffer);
 }

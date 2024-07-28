@@ -12,8 +12,8 @@
 #include <psp2/kernel/threadmgr.h> //sceKernelDelayThread
 
 // include classes
-#include "../classes/category_class.hpp"
+#include "../classes/search_result_class.hpp"
 
-int mainPage(vector<Category> *);
+int searchResultsScreen(vector<Search_Result> *);
 
 #endif

@@ -57,7 +57,7 @@ include_directories(
 # Add all the files needed to compile here
 add_executable(${PROJECT_NAME}
   src/main.cpp
-  src/classes/category_class.hpp
+  src/classes/search_result_class.hpp
   src/services/scraper.hpp
   src/services/ime.hpp
   src/screens/home_screen.hpp

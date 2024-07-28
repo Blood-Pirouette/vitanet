@@ -15,3 +15,15 @@ def get_categories(markup):
         extracted_category_items.append((cleaned_text,url_link))
     return extracted_category_items
 
+def get_search_results(markup):
+    soup = BeautifulSoup(markup, "html.parser")
+    search_results = soup.find_all("div", class_="mw-search-result-heading")
+    extracted_search_results = []
+    for item in search_results:
+        a_tag = item.find('a')
+        title = a_tag.get('title')
+        url_link = a_tag.get('href')
+        extracted_search_results.append((title, url_link))
+    print(extracted_search_results)
+    return extracted_search_results
+
