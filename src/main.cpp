@@ -22,7 +22,7 @@
 using namespace std;
 
 // constant macro
-const int BUFFER_SIZE = 600 * 1024;
+const int BUFFER_SIZE = 1000 * 1024;
 string user_input_search;
 
 // function prototypes
@@ -46,6 +46,7 @@ int main()
 	// find matching articles
 	user_input_search = user_input;
 	string url = "https://en.wikipedia.org/w/index.php?search=" + user_input_search + "&title=Special:Search&profile=advanced&fulltext=1&ns0=1";
+	cout << "Searching for: " << url << endl; // debug
 	searchArticle(url, "/" + user_input_search);
 
 	// scrape the search results page
@@ -53,18 +54,20 @@ int main()
 
 	// Start the main page
 	int selection = searchResultsScreen(&search_results);
-
+	while (true)
+	{
+		cout << "The selection index is: " << selection << " and the corresponding url is: " << search_results[selection].article_url << endl;
+	}
 	// Exit the app
 	sceKernelExitProcess(0);
 	return 0;
 }
 
 void scrapeSearchResultPage(vector<Search_Result> *search_results, string file_directory)
-{	
+{
 	// declare variables
-	char *htmlbuffer = (char*)malloc(BUFFER_SIZE);
-
-	string file_location = "ux0:data/vitanet/"+file_directory+"/index.html";
+	char *htmlbuffer = (char *)malloc(BUFFER_SIZE);
+	string file_location = "ux0:data/vitanet/" + file_directory + "/index.html";
 
 	// File handling
 	SceUID fd = sceIoOpen(file_location.c_str(), SCE_O_RDONLY, 0777);

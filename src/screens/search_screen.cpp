@@ -28,7 +28,7 @@ int searchResultsScreen(vector<Search_Result> *search_results)
 		vita2d_font_draw_text(text_font, X_POS, 60, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), HEADER_TXT_SIZE, "Search Results");
 		vita2d_font_draw_text(text_font, X_POS, 90, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), HEADER_TXT_SIZE, to_string(selection).c_str());
 		// track current page
-		int list_start = page * NO_LISTS_PAGE + 1;	   // track the beginning of the list
+		int list_start = page * NO_LISTS_PAGE;	   // track the beginning of the list
 		int list_end = NO_LISTS_PAGE * (page + 1) + 1; // track the end of the list
 
 		// track user input with the selection variable 
