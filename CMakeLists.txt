@@ -62,6 +62,7 @@ add_executable(${PROJECT_NAME}
   src/services/ime.hpp
   src/screens/home_screen.hpp
   src/screens/search_screen.hpp
+  src/screens/article_screen.hpp
 )
 
 

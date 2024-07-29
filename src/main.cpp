@@ -17,6 +17,7 @@
 // include screens
 #include "screens/home_screen.cpp"
 #include "screens/search_screen.cpp"
+#include "screens/article_screen.cpp"
 
 // namespace
 using namespace std;
@@ -31,9 +32,9 @@ void scrapeSearchResultPage(vector<Search_Result> *, string);
 int main()
 {
 	char user_input[SCE_IME_MAX_TEXT_LENGTH + 1] = {0};
-	vector<Search_Result> search_results; // A list called search_results of Search_Result objects
+	vector<Search_Result> search_results; // a list called search_results of Search_Result objects
 
-	// Initialize the network and the screen
+	// initialize the network and the screen
 	vita2d_init();
 	vita2d_set_clear_color(RGBA8(0, 0, 0, 255));
 
@@ -52,12 +53,12 @@ int main()
 	// scrape the search results page
 	scrapeSearchResultPage(&search_results, user_input_search);
 
-	// Start the main page
+	// start the main page
 	int selection = searchResultsScreen(&search_results);
-	while (true)
-	{
-		cout << "The selection index is: " << selection << " and the corresponding url is: " << search_results[selection].article_url << endl;
-	}
+
+	// start the article page
+	articleScreen(search_results[selection].article_url);
+
 	// Exit the app
 	sceKernelExitProcess(0);
 	return 0;
