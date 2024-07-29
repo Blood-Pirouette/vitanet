@@ -11,6 +11,8 @@
 #include <psp2/ctrl.h>             //sceCtrlPeekBufferPositive, SceCtrlData
 #include <psp2/kernel/threadmgr.h> //sceKernelDelayThread
 
+#define TEXT_COLOR RGBA8(0x00, 0x00, 0x00, 0xFF)
+
 void articleScreen(std::string);
 
 #endif

@@ -3,35 +3,27 @@
 // namespace
 using namespace std;
 
-// constant macro
-const int X_POS = 50;
-const int HEADER_TXT_SIZE = 32;
-const int LIST_TXT_SIZE = 20;
-const int NO_LISTS_PAGE = 8;
-
-// global variables
-vita2d_font *text_font; // defines font
-SceCtrlData pad;		// monitor trackpad presses
-
 int searchResultsScreen(vector<Search_Result> *search_results)
 {
+
 	int selection = 0;
-	int page = 0; // used to track current list page
-	text_font = vita2d_load_font_file("app0:assets/font.ttf");
+	int page = 0;	 // used to track current list page
+	SceCtrlData pad; // monitor trackpad presses
+	vita2d_font *text_font = vita2d_load_font_file("app0:assets/font.ttf");
 
 	// continuously draw choices and keep track of selection
 	while (true)
 	{
-		// every frame draw the title 
+		// every frame draw the title
 		vita2d_start_drawing();
 		vita2d_clear_screen();
-		vita2d_font_draw_text(text_font, X_POS, 60, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), HEADER_TXT_SIZE, "Search Results");
-		vita2d_font_draw_text(text_font, X_POS, 90, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), HEADER_TXT_SIZE, to_string(selection).c_str());
+		vita2d_font_draw_text(text_font, X_POS, 60, TEXT_COLOR, HEADER_TXT_SIZE, "Search Results");
+		vita2d_font_draw_text(text_font, X_POS, 90, TEXT_COLOR, HEADER_TXT_SIZE, to_string(selection).c_str());
 		// track current page
-		int list_start = page * NO_LISTS_PAGE;	   // track the beginning of the list
+		int list_start = page * NO_LISTS_PAGE;		   // track the beginning of the list
 		int list_end = NO_LISTS_PAGE * (page + 1) + 1; // track the end of the list
 
-		// track user input with the selection variable 
+		// track user input with the selection variable
 		sceCtrlPeekBufferPositive(0, &pad, 1);
 		if (pad.buttons & SCE_CTRL_DOWN)
 		{
@@ -71,16 +63,16 @@ int searchResultsScreen(vector<Search_Result> *search_results)
 		{
 			list_end = search_results->size() - 1;
 		}
-		// every frame draw all title for each Search_Result object in the search_results list 
+		// every frame draw all title for each Search_Result object in the search_results list
 		for (int i = list_start; i < list_end; i++)
 		{
 			if (i == selection)
 			{
-				vita2d_font_draw_text(text_font, X_POS, 100 + ((i - page * NO_LISTS_PAGE) * 50), RGBA8(0x0A, 0xC0, 0x2B, 0xFF), LIST_TXT_SIZE, (*search_results)[i].title.c_str());
+				vita2d_font_draw_text(text_font, X_POS, 130 + ((i - page * NO_LISTS_PAGE) * 50), HIGHLIGHT_COLOR, LIST_TXT_SIZE, (*search_results)[i].title.c_str());
 			}
 			else
 			{
-				vita2d_font_draw_text(text_font, X_POS, 100 + ((i - page * NO_LISTS_PAGE) * 50), RGBA8(0xFF, 0xFF, 0xFF, 0xFF), LIST_TXT_SIZE, (*search_results)[i].title.c_str());
+				vita2d_font_draw_text(text_font, X_POS, 130 + ((i - page * NO_LISTS_PAGE) * 50), TEXT_COLOR, LIST_TXT_SIZE, (*search_results)[i].title.c_str());
 			}
 		}
 

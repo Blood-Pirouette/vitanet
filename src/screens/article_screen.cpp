@@ -1,4 +1,4 @@
-#include "article_screen.hpp"
+#include "article_screen.hpp" // header file
 
 // namespace
 using namespace std;
@@ -14,7 +14,7 @@ void articleScreen(string url)
 		// every frame draw the title
 		vita2d_start_drawing();
 		vita2d_clear_screen();
-		vita2d_font_draw_text(text_font, 50, 60, RGBA8(0x8E, 0x0A, 0xC0, 0xFF), 32, url.c_str());
+		vita2d_font_draw_text(text_font, 50, 60, TEXT_COLOR, 32, url.c_str());
 
 		// end drawing and swap buffers
 		vita2d_end_drawing();

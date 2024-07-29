@@ -25,6 +25,7 @@ using namespace std;
 // constant macro
 const int BUFFER_SIZE = 1000 * 1024;
 string user_input_search;
+	
 
 // function prototypes
 void scrapeSearchResultPage(vector<Search_Result> *, string);
@@ -36,7 +37,7 @@ int main()
 
 	// initialize the network and the screen
 	vita2d_init();
-	vita2d_set_clear_color(RGBA8(0, 0, 0, 255));
+	vita2d_set_clear_color(RGBA8(255, 255, 255, 255));
 
 	// show the home page
 	homePage();
