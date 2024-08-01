@@ -1,14 +1,4 @@
-#include <assert.h>
-#include <algorithm>
-#include <vector>
-#include <string.h>
-
-#include <iostream>
-#include <stdlib.h>
-
-#include <Python.h>
 #include "scraper.hpp"
-#include "../classes/search_result_class.hpp"
 
 using namespace std;
 
@@ -62,6 +52,11 @@ string recieve_search_results_from_python(const char *markup, vector<Search_Resu
 		return "Failed to get data from the html file";
 	}
 	return "";
+}
+
+string recieve_article_from_python(const char *markup, map<string, vector<string>> *article, PyObject *p_main_module)
+{
+
 }
 
 string getSearchResults(vector<Search_Result> *search_results, const char *markup)

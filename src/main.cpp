@@ -4,6 +4,7 @@
 
 // vita2d library
 #include <vita2d.h>
+#include <map>
 
 // psp2 libraries
 #include <psp2/kernel/threadmgr.h> //sceKernelExitProcess
@@ -34,6 +35,7 @@ int main()
 {
 	char user_input[SCE_IME_MAX_TEXT_LENGTH + 1] = {0};
 	vector<Search_Result> search_results; // a list called search_results of Search_Result objects
+	map<string, vector<string>> article; // a map containing the scraped article with the header and associated paragraphs
 
 	// initialize the network and the screen
 	vita2d_init();
