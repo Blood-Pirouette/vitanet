@@ -1,20 +1,5 @@
 from bs4 import BeautifulSoup
 
-
-# function to get categories
-def get_categories(markup):
-    # The variable markup exists in the global namespace before execution
-    soup = BeautifulSoup(markup, 'html.parser')
-    categories = soup.find('ul', class_='nav nav-list')
-    category_items = categories.find_all('li')
-    extracted_category_items = []
-    for item in category_items:
-        cleaned_text = ' '.join(item.text.split())
-        a_tag = item.find('a')
-        url_link = a_tag.get('href')
-        extracted_category_items.append((cleaned_text,url_link))
-    return extracted_category_items
-
 def get_search_results(markup):
     soup = BeautifulSoup(markup, "html.parser")
     search_results = soup.find_all("div", class_="mw-search-result-heading")
@@ -27,3 +12,13 @@ def get_search_results(markup):
     print(extracted_search_results)
     return extracted_search_results
 
+def get_article(markup):
+    soup = BeautifulSoup(markup, 'html.parser')
+    data = {}
+    for item in soup.find_all(['h2', 'p']):
+        if item.name == 'h2':
+            current_header = item.get_text()
+            data[current_header] = []
+        if item.name == 'p':
+            data[current_header].append(item.get_text())
+    return data
