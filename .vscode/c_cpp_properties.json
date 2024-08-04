@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "VitaSDK",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/include",
+                "/opt/vitasdk/arm-vita-eabi/include/python2.7"
+            ],
+            "defines": [],
+            "compilerPath": "/opt/vitasdk/bin/arm-vita-eabi-gcc",
+            "cStandard": "c17",
+            "intelliSenseMode": "linux-clang-x64",
+            "browse": {
+                "path": [
+                    "/opt/vitasdk/arm-vita-eabi/include",
+                    "/usr/include"
+                ]
+            }
+        }
+    ],
+    "version": 4
+}
+//            "cppStandard": "c++17",
+
+
