@@ -30,6 +30,8 @@ string user_input_search;
 
 // function prototypes
 void scrapeSearchResultPage(vector<Search_Result> *, string);
+void scrapeArticlePage(map<string, vector<string>> *, string);
+
 
 int main()
 {
@@ -60,7 +62,10 @@ int main()
 	int selection = searchResultsScreen(&search_results);
 
 	// start the article page
-	articleScreen(search_results[selection].article_url);
+	scrapeArticlePage(&article, "Anime");
+	map<string, vector<string>>:: iterator it = article.begin();
+	string first_key = it->first;
+	articleScreen(first_key);
 
 	// Exit the app
 	sceKernelExitProcess(0);
@@ -79,5 +84,19 @@ void scrapeSearchResultPage(vector<Search_Result> *search_results, string file_d
 	htmlbuffer[BUFFER_SIZE - 1] = '\0';
 
 	// Scrape site and get results
-	getSearchResults(search_results, htmlbuffer);
+	string error = recieve_search_results_from_python(htmlbuffer, search_results);
+}
+
+void scrapeArticlePage(map<string, vector<string>> *article, string file_directory)
+{
+	char* htmlbuffer = (char*)malloc(BUFFER_SIZE);
+	string file_location = "ux0:data/vitanet/" + file_directory + "/article.html";
+
+	// File handling
+	SceUID fd = sceIoOpen(file_location.c_str(), SCE_O_RDONLY, 0777);
+	sceIoRead(fd, htmlbuffer, BUFFER_SIZE);
+	htmlbuffer[BUFFER_SIZE - 1] = '\0';
+
+	// Scrape site and get results
+	string error = recieve_article_from_python(htmlbuffer, article);
 }

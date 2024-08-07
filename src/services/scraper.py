@@ -9,7 +9,6 @@ def get_search_results(markup):
         title = a_tag.get('title')
         url_link = a_tag.get('href')
         extracted_search_results.append((title, url_link))
-    print(extracted_search_results)
     return extracted_search_results
 
 def get_article(markup):
