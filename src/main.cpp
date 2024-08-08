@@ -62,10 +62,8 @@ int main()
 	int selection = searchResultsScreen(&search_results);
 
 	// start the article page
-	scrapeArticlePage(&article, "Anime");
-	map<string, vector<string>>:: iterator it = article.begin();
-	string first_key = it->first;
-	articleScreen(first_key);
+	scrapeArticlePage(&article, "Anime"); // testing purposes
+	articleScreen(&article);
 
 	// Exit the app
 	sceKernelExitProcess(0);

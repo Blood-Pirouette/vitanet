@@ -3,6 +3,8 @@
 
 // standard libraries
 #include <string>
+#include <vector>
+#include <map>
 
 // vita2d library
 #include <vita2d.h> //vita2d modules
@@ -13,6 +15,6 @@
 
 #define TEXT_COLOR RGBA8(0x00, 0x00, 0x00, 0xFF)
 
-void articleScreen(std::string);
+void articleScreen(map<string, vector<string>> *);
 
 #endif
