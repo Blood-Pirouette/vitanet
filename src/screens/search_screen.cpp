@@ -5,7 +5,13 @@ using namespace std;
 
 int searchResultsScreen(vector<Search_Result> *search_results)
 {
+	// constant macro
+	const int X_POS = 50;
+	const int HEADER_TXT_SIZE = 32;
+	const int LIST_TXT_SIZE = 20;
+	const int NO_LISTS_PAGE = 8;
 
+	// local variables
 	int selection = 0;
 	int page = 0;	 // used to track current list page
 	SceCtrlData pad; // monitor trackpad presses

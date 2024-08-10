@@ -5,6 +5,12 @@ using namespace std;
 
 void homePage()
 {
+	// constant macro
+	const int BODY_TXT_X_POS = 50;
+	const int BODY_TXT_Y_POS = 50;
+	const int BODY_TXT_SIZE = 32;
+	const string WELCOME_MESSAGE = "Press X to search for an article or O to exit the app";
+	
 	// declare local variables
 	SceCtrlData pad; // monitor trackpad presses
 	vita2d_font *text_font = vita2d_load_font_file("app0:assets/font.ttf");
