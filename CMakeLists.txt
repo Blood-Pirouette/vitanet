@@ -124,6 +124,7 @@ add_custom_target(send ALL
   COMMAND echo destroy | nc ${PSVITAIP} 1338
   COMMAND curl -T eboot.bin ftp://${PSVITAIP}:1337/ux0:/app/${VITA_TITLEID}/
   COMMAND curl -T ${CMAKE_CURRENT_SOURCE_DIR}/src/services/scraper.py ftp://${PSVITAIP}:1337/ux0:/app/${VITA_TITLEID}/lib/services/
+  COMMAND curl -T ${CMAKE_CURRENT_SOURCE_DIR}/assets/font.ttf ftp://${PSVITAIP}:1337/ux0:/app/${VITA_TITLEID}/assets/
   COMMAND echo launch ${VITA_TITLEID} | nc ${PSVITAIP} 1338
   DEPENDS ${PROJECT_NAME}.vpk-vpk
 )

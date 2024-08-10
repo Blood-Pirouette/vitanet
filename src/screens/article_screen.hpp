@@ -15,6 +15,7 @@
 
 #define TEXT_COLOR RGBA8(0x00, 0x00, 0x00, 0xFF)
 
+string textWrap(string, int, int);
 void articleScreen(map<string, vector<string>> *);
 
 #endif
