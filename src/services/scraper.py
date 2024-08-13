@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from bs4 import BeautifulSoup
 
 def get_search_results(markup):
@@ -13,11 +14,11 @@ def get_search_results(markup):
 
 def get_article(markup):
     soup = BeautifulSoup(markup, 'html.parser')
-    data = {}
+    data = OrderedDict()
     for item in soup.find_all(['h2', 'p']):
         if item.name == 'h2':
             current_header = item.get_text()
             data[current_header] = []
         if item.name == 'p':
             data[current_header].append(item.get_text())
-    return data
+    return data.items()

@@ -18,30 +18,32 @@ string textWrap(string paragraph, int location, int constant)
 	}
 }
 
-void articleScreen(map<string, vector<string>> *article)
+void articleScreen(vector<pair<string, vector<string>>> *article)
 {
 	// declare local variables
 	SceCtrlData pad; // monitor trackpad presses
 	vita2d_font *text_font = vita2d_load_font_file("app0:assets/font.ttf");
-	map<string, vector<string>>::iterator it = article->begin(); // initialize an iterator
-	int p_i = 0;												 // initialize a paragraph tracker
+	int h_i = 0; // initialize a header tracker
+	int p_i = 0; // initialize a paragraph tracker
 
 	// continuously draw choices and keep track of selection
-	while (it != article->end())
+	while (h_i < article->size())
 	{
 
 		// every frame draw the headers
 		vita2d_start_drawing();
 		vita2d_clear_screen();
 		vita2d_draw_line(0.0, 100.0, 960.0, 100.0, TEXT_COLOR); // header split
+		pair<string, vector<string>> item = (*article)[h_i];	// get pair item
 
 		// monitor vita pad
 		sceCtrlPeekBufferPositive(0, &pad, 1);
+
 		if (pad.buttons & SCE_CTRL_CROSS)
 		{
-			if (p_i == (it->second).size() - 1)
+			if (p_i == get<1>(item).size() - 1)
 			{
-				it++;	 // increment the iterator
+				h_i++;	 // increment the header iterator
 				p_i = 0; // reset the paragraph tracker
 			}
 			else
@@ -51,11 +53,11 @@ void articleScreen(map<string, vector<string>> *article)
 		}
 
 		// draw the header in the page
-		string header = it->first;
+		string header = get<0>(item);
 		vita2d_font_draw_text(text_font, 30, 70, TEXT_COLOR, 40, header.c_str());
 
 		// draw the paragraph
-		string raw_paragraph = (it->second)[p_i];
+		string raw_paragraph = get<1>(item)[p_i];
 		string wrapped_paragraph = textWrap(raw_paragraph, 80, 80);
 		vita2d_font_draw_text(text_font, 10, 140, TEXT_COLOR, 26, wrapped_paragraph.c_str());
 

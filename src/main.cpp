@@ -4,7 +4,7 @@
 
 // vita2d library
 #include <vita2d.h>
-#include <map>
+#include <utility> //std::pair
 
 // psp2 libraries
 #include <psp2/kernel/threadmgr.h> //sceKernelExitProcess
@@ -30,14 +30,14 @@ string user_input_search;
 
 // function prototypes
 void scrapeSearchResultPage(vector<Search_Result> *, string);
-void scrapeArticlePage(map<string, vector<string>> *, string);
+void scrapeArticlePage(vector<pair<string, vector<string>>> *, string);
 
 
 int main()
 {
 	char user_input[SCE_IME_MAX_TEXT_LENGTH + 1] = {0};
 	vector<Search_Result> search_results; // a list called search_results of Search_Result objects
-	map<string, vector<string>> article; // a map containing the scraped article with the header and associated paragraphs
+	vector<pair<string, vector<string>>> article; // a dictionary containing the scraped article with the header and associated paragraphs
 
 	// initialize the network and the screen
 	vita2d_init();
@@ -85,7 +85,7 @@ void scrapeSearchResultPage(vector<Search_Result> *search_results, string file_d
 	string error = recieve_search_results_from_python(htmlbuffer, search_results);
 }
 
-void scrapeArticlePage(map<string, vector<string>> *article, string file_directory)
+void scrapeArticlePage(vector<pair<string, vector<string>>> *article, string file_directory)
 {
 	char* htmlbuffer = (char*)malloc(BUFFER_SIZE);
 	string file_location = "ux0:data/vitanet/" + file_directory + "/article.html";

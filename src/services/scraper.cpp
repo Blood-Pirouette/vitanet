@@ -85,12 +85,11 @@ string recieve_search_results_from_python(char *markup, vector<Search_Result> *s
 	return "";
 }
 
-string recieve_article_from_python(char *markup, map<string, vector<string>> *article)
+string recieve_article_from_python(char *markup, vector<pair<string, vector<string>>> *article)
 {
 
 	// get the string variable from the global dictionary
 	PyObject *p_main_module = initialize_python();
-
 	PyObject *p_func = PyObject_GetAttrString(p_main_module, "get_article");
 	PyObject *p_markup = PyString_FromString(markup);
 
@@ -109,35 +108,36 @@ string recieve_article_from_python(char *markup, map<string, vector<string>> *ar
 		// call function
 		PyObject *p_article = PyObject_CallObject(p_func, p_args);
 
-		// PyObject dictionary variables
-		PyObject *p_key;
-		PyObject *p_value;
-		Py_ssize_t pos = 0;
-
-		// loop through the dictionary and extract the content
-		while (PyDict_Next(p_article, &pos, &p_key, &p_value))
+		for (int i = 0; i < PyList_Size(p_article); i++)
 		{
-			vector<string> values; // vector to store the paragraphs
-			for (int i = 0; i < PyList_Size(p_value); i++)
-			{
-				// convert paragraphs under each header
-				PyObject *p_item = PyList_GetItem(p_value, i);
-				PyObject *c_paragraph_utf8 = PyUnicode_AsUTF8String(p_item);
-				const char *c_paragraph = PyString_AsString(c_paragraph_utf8);
-				string cpp_paragraph = c_paragraph;
-				cout << cpp_paragraph << endl << endl;
-				values.push_back(c_paragraph);
-			}
+			PyObject *p_item = PyList_GetItem(p_article, i); // get the tuple
+			PyObject *p_key = PyTuple_GetItem(p_item, 0);	 // get the header
+			PyObject *p_value = PyTuple_GetItem(p_item, 1);	 // get the paragraph list
+			vector<string> paragraphs;						 // vector to store the paragraphs for each header
 
-			// convert header of each paragraph
+			// get header from tuple
 			PyObject *c_key_utf8 = PyUnicode_AsUTF8String(p_key);
 			const char *c_key = PyString_AsString(c_key_utf8);
 			string cpp_key = c_key;
+			cout << "The cpp_key is " << cpp_key << endl;
 
-			// store the header and the corresponding paragraphs
-			(*article)[c_key] = values;
-			values.clear();
+			// loop through paragraph list
+			for (int j = 0; j < PyList_Size(p_value); j++)
+			{
+				PyObject *p_paragraph = PyList_GetItem(p_value, j); // get the pargraph
+
+				// convert the pargraph and append it to the paragraph vector
+				PyObject *c_value_utf8 = PyUnicode_AsUTF8String(p_paragraph);
+				const char *c_value = PyString_AsString(c_value_utf8);
+				string cpp_value = c_value;
+				paragraphs.push_back(cpp_value);
+			}
+			// append the header and corresponding paragraphs to the dictionary
+			article->push_back(make_pair(cpp_key, paragraphs));
+			// clear paragraphs vector
+			paragraphs.clear();
 		}
+
 		// convert the Python list to a C++ vector of strings
 		Py_Finalize();
 		return "Success";

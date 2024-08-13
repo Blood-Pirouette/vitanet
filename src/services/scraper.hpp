@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <map>
+#include <utility>
 
 #include <Python.h>
 #include "../classes/search_result_class.hpp"
@@ -30,10 +30,10 @@ string recieve_search_results_from_python(char *, vector<Search_Result> *);
 /*
 Takes two inputs:
 1) c string containing the html markup
-1) map<string, vector<string>> pointer to store the scraped article
+1) vector<pair<string, vector<string>>> pointer to store the scraped article
 
 Returns error message, if any
 */
-string recieve_article_from_python(char *, vector<Search_Result> *);
+string recieve_article_from_python(char *, vector<pair<string, vector<string>>> *);
 
 #endif
