@@ -178,7 +178,7 @@ directory example: "/mainpage"
 mainpage directory will be created under ux0:data/vitanet and the
 relevant index.html will be placed there
 */
-void searchArticle(string url, string directory)
+void download(string url)
 {
 
 	// initialize network
@@ -187,16 +187,14 @@ void searchArticle(string url, string directory)
 
 	// initialize directories
 	struct SceIoStat *dirStat = (SceIoStat *)malloc(sizeof(SceIoStat));
-	string cpp_directory = "ux0:data/vitanet" + directory;
-	const char *c_directory = cpp_directory.c_str();
-	const char *c_url = url.c_str();
+	const char *c_directory = "ux0:data/vitanet";
 	if (sceIoGetstat(c_directory, dirStat) < 0)
 	{
 		sceIoMkdir(c_directory, 0777);
 	}
 
 	// download file
-	curlDownloadFile(url, "ux0:data/vitanet" + directory + "/index.html");
+	curlDownloadFile(url, "ux0:data/vitanet/index.html");
 
 	// end network
 	httpTerm();

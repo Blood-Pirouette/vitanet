@@ -26,17 +26,15 @@ using namespace std;
 // constant macro
 const int BUFFER_SIZE = 1000 * 1024;
 string user_input_search;
-	
 
 // function prototypes
-void scrapeSearchResultPage(vector<Search_Result> *, string);
-void scrapeArticlePage(vector<pair<string, vector<string>>> *, string);
-
+void scrapeSearchResultPage(vector<Search_Result> *);
+void scrapeArticlePage(vector<pair<string, vector<string>>> *);
 
 int main()
 {
 	char user_input[SCE_IME_MAX_TEXT_LENGTH + 1] = {0};
-	vector<Search_Result> search_results; // a list called search_results of Search_Result objects
+	vector<Search_Result> search_results;		  // a list called search_results of Search_Result objects
 	vector<pair<string, vector<string>>> article; // a dictionary containing the scraped article with the header and associated paragraphs
 
 	// initialize the network and the screen
@@ -51,18 +49,26 @@ int main()
 
 	// find matching articles
 	user_input_search = user_input;
-	string url = "https://en.wikipedia.org/w/index.php?search=" + user_input_search + "&title=Special:Search&profile=advanced&fulltext=1&ns0=1";
-	cout << "Searching for: " << url << endl; // debug
-	searchArticle(url, "/" + user_input_search);
+	string search_url = "https://en.wikipedia.org/w/index.php?search=" + user_input_search + "&title=Special:Search&profile=advanced&fulltext=1&ns0=1";
+	cout << "Searching for: " << search_url << endl; // debug
+
+	// download the search page
+	download(search_url);
 
 	// scrape the search results page
-	scrapeSearchResultPage(&search_results, user_input_search);
+	scrapeSearchResultPage(&search_results);
 
-	// start the main page
+	// start the search results page and track user selection
 	int selection = searchResultsScreen(&search_results);
 
+	// download the article page
+	string corrected_url = "https://en.wikipedia.org" + search_results[selection].article_url;
+	download(corrected_url);
+
+	// scrape the article page
+	scrapeArticlePage(&article);
+
 	// start the article page
-	scrapeArticlePage(&article, "Anime"); // testing purposes
 	articleScreen(&article);
 
 	// Exit the app
@@ -70,11 +76,11 @@ int main()
 	return 0;
 }
 
-void scrapeSearchResultPage(vector<Search_Result> *search_results, string file_directory)
+void scrapeSearchResultPage(vector<Search_Result> *search_results)
 {
 	// declare variables
 	char *htmlbuffer = (char *)malloc(BUFFER_SIZE);
-	string file_location = "ux0:data/vitanet/" + file_directory + "/index.html";
+	string file_location = "ux0:data/vitanet/index.html";
 
 	// File handling
 	SceUID fd = sceIoOpen(file_location.c_str(), SCE_O_RDONLY, 0777);
@@ -85,10 +91,10 @@ void scrapeSearchResultPage(vector<Search_Result> *search_results, string file_d
 	string error = recieve_search_results_from_python(htmlbuffer, search_results);
 }
 
-void scrapeArticlePage(vector<pair<string, vector<string>>> *article, string file_directory)
+void scrapeArticlePage(vector<pair<string, vector<string>>> *article)
 {
-	char* htmlbuffer = (char*)malloc(BUFFER_SIZE);
-	string file_location = "ux0:data/vitanet/" + file_directory + "/article.html";
+	char *htmlbuffer = (char *)malloc(BUFFER_SIZE);
+	string file_location = "ux0:data/vitanet/index.html";
 
 	// File handling
 	SceUID fd = sceIoOpen(file_location.c_str(), SCE_O_RDONLY, 0777);
