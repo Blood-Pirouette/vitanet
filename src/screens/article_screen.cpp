@@ -33,7 +33,7 @@ void articleScreen(vector<pair<string, vector<string>>> *article)
 		vita2d_start_drawing();
 		vita2d_clear_screen();
 		vita2d_draw_line(0.0, 60.0, 960.0, 60.0, TEXT_COLOR); // header split
-		pair<string, vector<string>> item = (*article)[h_i];	// get pair item
+		pair<string, vector<string>> item = (*article)[h_i];  // get pair item
 
 		// monitor vita pad
 		sceCtrlPeekBufferPositive(0, &pad, 1);
@@ -49,6 +49,18 @@ void articleScreen(vector<pair<string, vector<string>>> *article)
 			{
 				p_i++; // increment the paragraph tracker
 			}
+		}
+		else if (pad.buttons & SCE_CTRL_TRIANGLE)
+		{
+			if (h_i > 0)
+			{
+				h_i--;	 // go back to the previous header
+				p_i = 0; // reset pargraph tracker to 0
+			}
+		}
+		else if (pad.buttons & SCE_CTRL_CIRCLE)
+		{
+			break;
 		}
 
 		// draw the header in the page
