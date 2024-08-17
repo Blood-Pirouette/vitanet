@@ -28,6 +28,7 @@ const int BUFFER_SIZE = 1000 * 1024;
 string user_input_search;
 
 // function prototypes
+void url_encode(string *); // encode string to url equivalent
 void scrapeSearchResultPage(vector<Search_Result> *);
 void scrapeArticlePage(vector<pair<string, vector<string>>> *);
 
@@ -49,6 +50,7 @@ int main()
 
 	// find matching articles
 	user_input_search = user_input;
+	url_encode(&user_input_search);
 	string search_url = "https://en.wikipedia.org/w/index.php?search=" + user_input_search + "&title=Special:Search&profile=advanced&fulltext=1&ns0=1";
 	cout << "Searching for: " << search_url << endl; // debug
 
@@ -103,4 +105,15 @@ void scrapeArticlePage(vector<pair<string, vector<string>>> *article)
 
 	// Scrape site and get results
 	string error = recieve_article_from_python(htmlbuffer, article);
+}
+
+void url_encode(string *user_input_search)
+{
+	for (int i = 0; i < user_input_search->length(); ++i)
+	{
+		if ((*user_input_search)[i] == ' ')
+		{
+			(*user_input_search)[i] = '+';
+		}
+	}
 }
