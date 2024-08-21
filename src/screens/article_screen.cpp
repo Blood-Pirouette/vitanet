@@ -38,9 +38,10 @@ void articleScreen(vector<pair<string, vector<string>>> *article)
 		// monitor vita pad
 		sceCtrlPeekBufferPositive(0, &pad, 1);
 
+		// monitor pad keys
 		if (pad.buttons & SCE_CTRL_CROSS)
 		{
-			if (p_i == get<1>(item).size() - 1)
+			if (p_i == get<1>(item).size() - 1 && h_i < article->size())
 			{
 				h_i++;	 // increment the header iterator
 				p_i = 0; // reset the paragraph tracker
