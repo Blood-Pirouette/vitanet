@@ -6,7 +6,7 @@ using namespace std;
 void homePage()
 {
 	// constant macro
-	const int BODY_TXT_X_POS = 480;
+	const int BODY_TXT_X_POS = 10;
 	const int BODY_TXT_Y_POS = 272;
 	const int BODY_TXT_SIZE = 32;
 	const string WELCOME_MESSAGE = "Press X to search for an article or O to exit the app";

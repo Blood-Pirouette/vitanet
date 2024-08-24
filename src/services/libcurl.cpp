@@ -174,9 +174,6 @@ void httpTerm()
 /*
 Call this function with the following parameters:
 url example: "https://google.com"
-directory example: "/mainpage"
-mainpage directory will be created under ux0:data/vitanet and the
-relevant index.html will be placed there
 */
 void download(string url)
 {
@@ -187,14 +184,14 @@ void download(string url)
 
 	// initialize directories
 	struct SceIoStat *dirStat = (SceIoStat *)malloc(sizeof(SceIoStat));
-	const char *c_directory = "ux0:data/vitanet";
+	const char *c_directory = "ux0:data/wikivita";
 	if (sceIoGetstat(c_directory, dirStat) < 0)
 	{
 		sceIoMkdir(c_directory, 0777);
 	}
 
 	// download file
-	curlDownloadFile(url, "ux0:data/vitanet/index.html");
+	curlDownloadFile(url, "ux0:data/wikivita/index.html");
 
 	// end network
 	httpTerm();

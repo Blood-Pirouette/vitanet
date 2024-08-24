@@ -86,7 +86,7 @@ void scrapeSearchResultPage(vector<Search_Result> *search_results)
 {
 	// declare variables
 	char *htmlbuffer = (char *)malloc(BUFFER_SIZE);
-	string file_location = "ux0:data/vitanet/index.html";
+	string file_location = "ux0:data/wikivita/index.html";
 
 	// File handling
 	SceUID fd = sceIoOpen(file_location.c_str(), SCE_O_RDONLY, 0777);
@@ -100,7 +100,7 @@ void scrapeSearchResultPage(vector<Search_Result> *search_results)
 void scrapeArticlePage(vector<pair<string, vector<string>>> *article)
 {
 	char *htmlbuffer = (char *)malloc(BUFFER_SIZE);
-	string file_location = "ux0:data/vitanet/index.html";
+	string file_location = "ux0:data/wikivita/index.html";
 
 	// File handling
 	SceUID fd = sceIoOpen(file_location.c_str(), SCE_O_RDONLY, 0777);
