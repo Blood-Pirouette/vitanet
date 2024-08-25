@@ -1,6 +1,6 @@
 # Wikivita
 
-Wikipedia web scraping app developed using VITASDK and BeautifulSoup 4
+Wikipedia scraping app developed using VITASDK and BeautifulSoup 4
 
 
 
