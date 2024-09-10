@@ -19,7 +19,7 @@
 /*
 Recursive wrap text function
 
-Takes two inputs:
+Takes two arguments:
 1) The text to be wrapped as string
 2) The number of words per line as two parameters
 
@@ -30,9 +30,24 @@ string textWrap(string, int, int);
 /*
 Draws the article on the screen
 
-Takes one input:
+Takes one argument:
 1) A collection of header and corresponding paragraph collections in a vector<pair> format
 */
 void articleScreen(vector<pair<string, vector<string>>> *);
+
+
+/*
+Increment or decrement header and paragraph trackers
+
+Takes three arguments:
+1) Size of article vector
+2) Pointer to the current pair item 
+3) Pointer to the the header tracker
+4) Pointer to the paragraph tracker
+5) int boolean to either increment (1) or decrement(0) 
+
+
+*/
+void modifyTracker(int, pair<string, vector<string>>*, int*, int*, int);
 
 #endif

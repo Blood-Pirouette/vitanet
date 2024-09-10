@@ -25,9 +25,10 @@ void articleScreen(vector<pair<string, vector<string>>> *article)
 	vita2d_font *text_font = vita2d_load_font_file("app0:assets/font.ttf");
 	int h_i = 0; // initialize a header tracker
 	int p_i = 0; // initialize a paragraph tracker
+	int article_size = article->size();
 
 	// continuously draw choices and keep track of selection
-	while (h_i < article->size())
+	while (h_i < article_size)
 	{
 		// every frame draw the headers
 		vita2d_start_drawing();
@@ -37,31 +38,20 @@ void articleScreen(vector<pair<string, vector<string>>> *article)
 
 		// monitor vita pad
 		sceCtrlPeekBufferPositive(0, &pad, 1);
-		
+
 		// monitor pad keys
-		if ((pad.buttons & SCE_CTRL_CROSS) && h_i < article->size() - 1)
+		if ((pad.buttons & SCE_CTRL_CROSS) && h_i < article_size - 1)
 		{
-			if (p_i == get<1>(item).size() - 1)
-			{
-				h_i++;	 // increment the header iterator
-				p_i = 0; // reset the paragraph tracker
-			}
-			else
-			{
-				p_i++; // increment the paragraph tracker
-			}
+			modifyTracker(article_size, &item, &h_i, &p_i, 1); //move to next header/paragraph
 		}
 		else if (pad.buttons & SCE_CTRL_TRIANGLE)
 		{
-			if (h_i > 0)
-			{
-				h_i--;	 // go back to the previous header
-				p_i = 0; // reset pargraph tracker to 0
-			}
+			modifyTracker(article_size, &item, &h_i, &p_i, 0); //move to previous header/paragraph
+
 		}
 		else if (pad.buttons & SCE_CTRL_CIRCLE)
 		{
-			break;
+			break; //exit app
 		}
 
 		// draw the header in the page
@@ -79,5 +69,29 @@ void articleScreen(vector<pair<string, vector<string>>> *article)
 
 		// defines how frequently the screen should be refreshed
 		sceKernelDelayThread(0.15 * 1000 * 1000);
+	}
+}
+
+void modifyTracker(int size, pair<string, vector<string>> *item, int *h_i, int *p_i, int direction)
+{
+	if (direction == 1)
+	{
+		if (*p_i == get<1>(*item).size() - 1)
+		{
+			(*h_i)++;	  // increment the header iterator
+			*p_i = 0; // reset the paragraph tracker
+		}
+		else
+		{
+			(*p_i)++; // increment the paragraph tracker
+		}
+	}
+	else if (direction == 0)
+	{
+		if (*h_i > 0)
+		{
+			(*h_i)--;	 // go back to the previous header
+			*p_i = 0; // reset pargraph tracker to 0
+		}
 	}
 }

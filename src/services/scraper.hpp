@@ -19,7 +19,7 @@ Returns global dictionary
 PyObject* initialize_python();
 
 /*
-Takes two inputs:
+Takes two arguments:
 1) c string containing the html markup
 1) vector<Search_Result> pointer to store the search results
 
@@ -28,7 +28,7 @@ Returns error message, if any
 string recieve_search_results_from_python(char *, vector<Search_Result> *);
 
 /*
-Takes two inputs:
+Takes two arguments:
 1) c string containing the html markup
 1) vector<pair<string, vector<string>>> pointer to store the scraped article
 
