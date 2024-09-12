@@ -33,7 +33,7 @@ Draws the article on the screen
 Takes one argument:
 1) A collection of header and corresponding paragraph collections in a vector<pair> format
 */
-void articleScreen(vector<pair<string, vector<string>>> *);
+int articleScreen(vector<pair<string, vector<string>>> *);
 
 
 /*

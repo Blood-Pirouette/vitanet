@@ -34,7 +34,8 @@ void scrapeArticlePage(vector<pair<string, vector<string>>> *);
 
 int main()
 {
-	while (true)
+	int app_running = 1;
+	while (app_running)
 	{
 		char user_input[SCE_IME_MAX_TEXT_LENGTH + 1] = {0};
 		vector<Search_Result> search_results;		  // a list called search_results of Search_Result objects
@@ -73,11 +74,9 @@ int main()
 		scrapeArticlePage(&article);
 
 		// start the article page
-		articleScreen(&article);
-
-		return 0;
+		app_running = articleScreen(&article);
 	}
-	
+
 	// Exit the app
 	sceKernelExitProcess(0);
 }

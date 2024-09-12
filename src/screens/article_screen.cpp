@@ -18,7 +18,7 @@ string textWrap(string paragraph, int location, int constant)
 	}
 }
 
-void articleScreen(vector<pair<string, vector<string>>> *article)
+int articleScreen(vector<pair<string, vector<string>>> *article)
 {
 	// declare local variables
 	SceCtrlData pad; // monitor trackpad presses
@@ -51,7 +51,11 @@ void articleScreen(vector<pair<string, vector<string>>> *article)
 		}
 		else if (pad.buttons & SCE_CTRL_CIRCLE)
 		{
-			break; //exit app
+			return 0; // exit to main menu
+		}
+		else if (pad.buttons & SCE_CTRL_SQUARE)
+		{
+			return 1; // exit app
 		}
 
 		// draw the header in the page
@@ -70,6 +74,7 @@ void articleScreen(vector<pair<string, vector<string>>> *article)
 		// defines how frequently the screen should be refreshed
 		sceKernelDelayThread(0.15 * 1000 * 1000);
 	}
+	return 0;
 }
 
 void modifyTracker(int size, pair<string, vector<string>> *item, int *h_i, int *p_i, int direction)
